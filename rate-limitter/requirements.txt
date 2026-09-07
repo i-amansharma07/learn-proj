@@ -1,0 +1,2 @@
+1. rate limitter type should vary for the type of use i.e "free" or "premium"
+2. suppors 4 types of rate limitter  and must be extensible (can add more features later without breaking exisiting system)
