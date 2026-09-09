@@ -1,4 +1,4 @@
-import { ConnectionPool } from "./db";
+import { ConnectionPool } from "./pool";
 
 const pool = new ConnectionPool(2);
 

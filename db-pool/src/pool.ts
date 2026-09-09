@@ -1,3 +1,5 @@
+//core of connection pooling by dbs
+
 class TCPConnection {
   readonly _id: number;
   constructor(id: number) {
@@ -75,7 +77,7 @@ export class ConnectionPool {
       resolve(connection);
       return;
     }
-
+ 
     //nobody waiting
     this._available.push(connection);
   }
