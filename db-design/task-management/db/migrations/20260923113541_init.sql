@@ -49,7 +49,7 @@ CREATE TABLE tasks(
     priority SMALLINT NOT NULL DEFAULT 1 CHECK (priority BETWEEN 1 AND 5),
     due_date DATE,
 
-    assigned_to UUID NOT NULLREFERENCES users ON DELETE SET NULL,
+    assigned_to UUID NOT NULL REFERENCES users ON DELETE SET NULL,
     project_id UUID NOT NULL REFERENCES projects ON DELETE CASCADE,
 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -61,7 +61,7 @@ CREATE TABLE tasks(
 -- 1 user <----> many projects and 1 project <----> users [many to many relationship bw users and projects so needed this junction table]
 CREATE TABLE project_member(
     project_id UUID NOT NULL REFERENCES projects on DELETE CASCADE,
-    user_id UUID NOT NULL REFERENCES users on DELETE CASCADE
+    user_id UUID NOT NULL REFERENCES users on DELETE CASCADE,
     role member_role NOT NUll DEFAULT 'member',
 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
