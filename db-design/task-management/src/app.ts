@@ -1,12 +1,14 @@
 import express from "express";
+import { userRouter } from "./modules/users/users.routes";
+
 const app = express();
-import { userRouter } from "./routes/users";
+app.use(express.json());
 
 app.get("/", (req, res) => {
   return res.send("hello");
 });
 
 //user routes
-app.use("/api/v1/user", userRouter);
+app.use("/api/v1/users", userRouter);
 
 export { app };

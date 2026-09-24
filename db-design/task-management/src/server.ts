@@ -1,12 +1,15 @@
 import "dotenv/config";
 import { app } from "./app";
+import { pingDB } from "./db/pool";
 
-//later make initApp call when services are connected like db
-if (true) {
-  initApp();
-} else {
-  process.exit(0);
-}
+
+
+pingDB()
+  .then(() => initApp())
+  .catch((err) => {
+    console.log("Application startup failed...");
+    process.exit(1);
+  });
 
 function initApp() {
   app
@@ -15,6 +18,6 @@ function initApp() {
     })
     .on("error", (err) => {
       console.log(err);
-      process.exit(0);
+      process.exit(1);
     });
 }
