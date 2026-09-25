@@ -16,8 +16,14 @@ export type CreateUserInput = {
   password: string;
 };
 
+//repo accepts this
 export type NewUser = {
   email: string;
   fullName: string;
   passwordHash: string;
+};
+
+export type UpdateUser = {
+  email?: string;
+  fullName?: string;
 };

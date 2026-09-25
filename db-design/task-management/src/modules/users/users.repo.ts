@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { NewUser, User } from "./user.types";
+import { NewUser, UpdateUser, User } from "./user.types";
 
 //private to this file
 type UserRow = {
@@ -12,7 +12,7 @@ type UserRow = {
 };
 
 //snake to camel case
-const toUser = (user: UserRow) : User => {
+const toUser = (user: UserRow): User => {
   return {
     id: user.id,
     email: user.email,
@@ -27,15 +27,15 @@ const userPublicFields = "id, email, full_name, created_at, updated_at";
 export class _UserRepo {
   constructor(private readonly db: Pool) {}
 
-  async getAllUsers(): Promise<User[]> {
-    const result = await this.db.query<UserRow>(
+  async getAllUsers(): Promise<User[] | null> {
+    const { rows } = await this.db.query<UserRow>(
       `SELECT *
       FROM users`,
     );
-    return result.rows.map(toUser)
+    return rows.map(toUser);
   }
 
-  async createUser(data: NewUser): Promise<User> {
+  async createUser(data: NewUser): Promise<User | null> {
     const { rows } = await this.db.query<UserRow>(
       `INSERT INTO users (email, full_name, password_hash)
       VALUES ($1, $2, $3)
@@ -43,10 +43,10 @@ export class _UserRepo {
       `,
       [data.email, data.fullName, data.passwordHash],
     );
-    return toUser(rows[0]);
+    return rows[0] ? toUser(rows[0]) : null;
   }
 
-  async getUserById(userId: string): Promise<User> {
+  async getUserById(userId: string): Promise<User | null> {
     const { rows } = await this.db.query<UserRow>(
       `
       SELECT ${userPublicFields}
@@ -56,7 +56,50 @@ export class _UserRepo {
       [userId],
     );
 
-    return toUser(rows[0]);
+    return rows[0] ? toUser(rows[0]) : null;
+  }
+
+  async deleteUserById(userId: string): Promise<number> {
+    const { rowCount } = await this.db.query(
+      `
+      DELETE FROM users
+      where id = $1
+      `,
+      [userId],
+    );
+
+    // 1 means user deleted else not deleted
+    return rowCount ?? 0;
+  }
+
+  //create trigger for update records
+  async updateUserById(userId: string, data: UpdateUser): Promise<User | null> {
+    const fields: string[] = [];
+    const values: unknown[] = [];
+    let i = 1;
+    if (data.email !== undefined) {
+      fields.push(`email = $${i++}`);
+      values.push(data.email);
+    }
+
+    if (data.fullName !== undefined) {
+      fields.push(`full_name = $${i++}`);
+      values.push(data.fullName);
+    }
+
+    values.push(userId);
+
+    const { rows } = await this.db.query<UserRow>(
+      `
+      UPDATE users
+      SET ${fields.join(", ")}
+      where id = $${i}
+      RETURNING ${userPublicFields}
+      `,
+      values,
+    );
+
+    return rows[0] ? toUser(rows[0]) : null;
   }
 }
 

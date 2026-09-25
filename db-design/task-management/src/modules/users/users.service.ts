@@ -1,5 +1,5 @@
 import { _UserRepo } from "./users.repo";
-import { CreateUserInput, NewUser } from "./user.types";
+import { CreateUserInput, NewUser, UpdateUser } from "./user.types";
 
 export class _UserService {
   //receive UserRepo
@@ -23,5 +23,28 @@ export class _UserService {
 
   async getUserById(userId: string) {
     return await this.repo.getUserById(userId);
+  }
+
+  async deleteUserById(userId: string) {
+    const deleteCount = await this.repo.deleteUserById(userId);
+
+    if (deleteCount === 0) {
+      return null;
+    }
+
+    return {};
+  }
+
+  async updateUserById(userId: string, data: UpdateUser) {
+    const user: UpdateUser = {
+      email: data.email,
+      fullName: data.fullName,
+    };
+
+    const updatedUser = await this.repo.updateUserById(userId, user);
+
+    if (!updatedUser) return null;
+
+    return updatedUser;
   }
 }

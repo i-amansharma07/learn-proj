@@ -1,10 +1,15 @@
-import { z } from "zod";
+import { email, z } from "zod";
 
 //Zod + DTO (HTTP boundary only)
 export const createUserSchema = z.object({
   email: z.email(),
   fullName: z.string().min(1),
   password: z.string().min(8).max(10),
+});
+
+export const updateUserSchema = z.object({
+  email: z.email().optional(),
+  fullName: z.string().optional(),
 });
 
 /*
