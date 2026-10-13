@@ -1,5 +1,6 @@
 import { _UserRepo } from "./users.repo";
 import { CreateUserInput, NewUser, UpdateUser } from "./user.types";
+import { apiError } from "../../utils/apiErrors";
 
 export class _UserService {
   //receive UserRepo
@@ -13,8 +14,9 @@ export class _UserService {
     // check for existing user
     const exists = await this.repo.userExists(data.email);
 
-    if(exists) return
-
+    if (exists) {
+      throw apiError.conflict("Email already exists");
+    }
 
     const hashedPass = data.password + "hashed";
 
@@ -24,7 +26,11 @@ export class _UserService {
       passwordHash: hashedPass,
     };
 
-    return await this.repo.createUser(user);
+    const createdUser = await this.repo.createUser(user);
+    if (!createdUser) {
+      throw apiError.internal();
+    }
+    return createdUser;
   }
 
   async getUserById(userId: string) {

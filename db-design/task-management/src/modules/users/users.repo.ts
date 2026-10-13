@@ -45,9 +45,7 @@ export class _UserRepo {
       [userEmail],
     );
 
-    if (rows.length > 0) return true;
-
-    return false;
+    return rows.length > 0;
   }
 
   async createUser(data: NewUser): Promise<User | null> {
