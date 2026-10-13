@@ -35,6 +35,21 @@ export class _UserRepo {
     return rows.map(toUser);
   }
 
+  async userExists(userEmail: string): Promise<boolean> {
+    const { rows } = await this.db.query(
+      `
+        SELECT id
+        FROM users
+        WHERE users.email = $1
+      `,
+      [userEmail],
+    );
+
+    if (rows.length > 0) return true;
+
+    return false;
+  }
+
   async createUser(data: NewUser): Promise<User | null> {
     const { rows } = await this.db.query<UserRow>(
       `INSERT INTO users (email, full_name, password_hash)
@@ -100,6 +115,41 @@ export class _UserRepo {
     );
 
     return rows[0] ? toUser(rows[0]) : null;
+  }
+
+  async getUserStatsById(userId: string) {
+    const { rows } = await this.db.query(
+      `
+        SELECT
+        u.id AS "user_id",
+        COUNT(DISTINCT pm.project_id) AS "totalProjects",
+        COUNT(DISTINCT t.id) AS "totalTasks",
+        COUNT(DISTINCT t.id) FILTER(
+        WHERE t.status = 'completed'
+        ) AS "completedTasks",
+        COUNT (DISTINCT t.id) FILTER (
+        WHERE t.status = 'pending'
+        ) AS "pendingTasks",
+        COUNT (DISTINCT t.id) FILTER (
+        WHERE t.status != 'completed'
+        AND
+        t.due_date < CURRENT_DATE
+        ) AS "overdueTasks"
+
+      FROM users u
+      left join project_member pm
+      on u.id = pm.user_id
+
+      left join tasks t
+      on u.id = t.assigned_to
+
+      where u.id = $1
+      GROUP BY u.id
+      `,
+      [userId],
+    );
+
+    return rows;
   }
 }
 

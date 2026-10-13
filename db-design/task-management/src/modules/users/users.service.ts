@@ -10,6 +10,12 @@ export class _UserService {
   }
 
   async createUser(data: CreateUserInput) {
+    // check for existing user
+    const exists = await this.repo.userExists(data.email);
+
+    if(exists) return
+
+
     const hashedPass = data.password + "hashed";
 
     const user: NewUser = {
@@ -46,5 +52,9 @@ export class _UserService {
     if (!updatedUser) return null;
 
     return updatedUser;
+  }
+
+  async getUserStatsById(userId: string): Promise<any> {
+    return await this.repo.getUserStatsById(userId);
   }
 }

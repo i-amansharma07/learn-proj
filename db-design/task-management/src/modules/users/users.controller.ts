@@ -92,4 +92,24 @@ const updateUserById: RequestHandler = async (req: Request, res: Response) => {
   });
 };
 
-export { getAllUsers, createUser, getUserById, deleteUserById, updateUserById };
+const getUserStatsById: RequestHandler = async (
+  req: Request,
+  res: Response,
+) => {
+  const { user_id } = req.params;
+
+  const data = await UserService.getUserStatsById(user_id as string);
+
+  return res.status(200).json({
+    data,
+  });
+};
+
+export {
+  getAllUsers,
+  createUser,
+  getUserById,
+  deleteUserById,
+  updateUserById,
+  getUserStatsById,
+};
