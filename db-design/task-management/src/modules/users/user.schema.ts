@@ -1,4 +1,4 @@
-import { email, z } from "zod";
+import { z } from "zod";
 
 //Zod + DTO (HTTP boundary only)
 export const createUserSchema = z.object({
@@ -12,6 +12,12 @@ export const updateUserSchema = z.object({
   fullName: z.string().optional(),
 });
 
+
+export const userParamSchema = z.object({
+  user_id: z.string().uuid()
+})
+
+
 /*
 CreateUserDto has the same shape as CreateUserInput,
 so TypeScript lets you pass one where the other is expected.
@@ -21,3 +27,4 @@ API contract changes, and the service input changes when business logic changes.
 */
 
 export type CreateUserDTO = z.infer<typeof createUserSchema>;
+export type UpdateUserDTO = z.infer<typeof updateUserSchema>;

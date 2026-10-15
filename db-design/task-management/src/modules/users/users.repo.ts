@@ -147,7 +147,7 @@ export class _UserRepo {
       [userId],
     );
 
-    return rows;
+    return rows.length > 0 ? rows : null;
   }
 }
 

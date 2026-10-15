@@ -1,15 +1,19 @@
 import { Request, Response, NextFunction } from "express";
 import { ZodType } from "zod";
 
-export const validate = (schema: ZodType) => {
-  return (req: Request, _res: Response, next: NextFunction) => {
-    const result = schema.safeParse(req.body);
+type RequestSource = "body" | "query" | "params";
+
+export const validate = (schema: ZodType, source: RequestSource) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const result = schema.safeParse(req[source]);
 
     if (!result.success) {
       return next(result.error);
     }
 
-    req.body = result.data;
+    //express provides this by default
+    res.locals.validated ??= {};
+    res.locals.validated[source] = result.data;
     next();
   };
 };
