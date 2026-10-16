@@ -1,5 +1,5 @@
 import { _UserRepo } from "./users.repo";
-import { CreateUserInput, NewUser, UpdateUser } from "./user.types";
+import { CreateUserInput, NewUser, UpdateUser, UserStats } from "./user.types";
 import { apiError } from "../../utils/apiErrors";
 
 export class _UserService {
@@ -12,7 +12,7 @@ export class _UserService {
 
   async createUser(data: CreateUserInput) {
     // check for existing user
-    const exists = await this.repo.userExists(data.email);
+    const exists = await this.repo.userExistsByMail(data.email);
 
     if (exists) {
       throw apiError.conflict("Email already exists");
@@ -34,17 +34,19 @@ export class _UserService {
   }
 
   async getUserById(userId: string) {
-    return await this.repo.getUserById(userId);
+    const user = await this.repo.getUserById(userId);
+    if (!user) {
+      throw apiError.notfound("User with this id");
+    }
+    return user;
   }
 
   async deleteUserById(userId: string) {
     const deleteCount = await this.repo.deleteUserById(userId);
 
     if (deleteCount === 0) {
-      return null;
+      throw apiError.notfound("User with this id");
     }
-
-    return {};
   }
 
   async updateUserById(userId: string, data: UpdateUser) {
@@ -55,12 +57,20 @@ export class _UserService {
 
     const updatedUser = await this.repo.updateUserById(userId, user);
 
-    if (!updatedUser) return null;
+    if (!updatedUser) {
+      throw apiError.notfound("User with this id");
+    }
 
     return updatedUser;
   }
 
-  async getUserStatsById(userId: string): Promise<any> {
-    return await this.repo.getUserStatsById(userId);
+  async getUserStatsById(userId: string): Promise<UserStats[]> {
+    const stats = await this.repo.getUserStatsById(userId);
+
+    if (stats.length === 0) {
+      throw apiError.notfound("User with this id");
+    }
+
+    return stats;
   }
 }

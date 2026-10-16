@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { NewUser, UpdateUser, User } from "./user.types";
+import { NewUser, UpdateUser, User, UserStats } from "./user.types";
 
 //private to this file
 type UserRow = {
@@ -27,7 +27,7 @@ const userPublicFields = "id, email, full_name, created_at, updated_at";
 export class _UserRepo {
   constructor(private readonly db: Pool) {}
 
-  async getAllUsers(): Promise<User[] | null> {
+  async getAllUsers(): Promise<User[]> {
     const { rows } = await this.db.query<UserRow>(
       `SELECT *
       FROM users`,
@@ -35,7 +35,7 @@ export class _UserRepo {
     return rows.map(toUser);
   }
 
-  async userExists(userEmail: string): Promise<boolean> {
+  async userExistsByMail(userEmail: string): Promise<boolean> {
     const { rows } = await this.db.query(
       `
         SELECT id
@@ -48,7 +48,20 @@ export class _UserRepo {
     return rows.length > 0;
   }
 
-  async createUser(data: NewUser): Promise<User | null> {
+  async userExistsById(userId: string): Promise<boolean> {
+    const { rows } = await this.db.query(
+      `
+        SELECT id
+        FROM users
+        WHERE users.id = $1
+      `,
+      [userId],
+    );
+
+    return rows.length > 0;
+  }
+
+  async createUser(data: NewUser): Promise<User> {
     const { rows } = await this.db.query<UserRow>(
       `INSERT INTO users (email, full_name, password_hash)
       VALUES ($1, $2, $3)
@@ -56,7 +69,7 @@ export class _UserRepo {
       `,
       [data.email, data.fullName, data.passwordHash],
     );
-    return rows[0] ? toUser(rows[0]) : null;
+    return rows[0] && toUser(rows[0]);
   }
 
   async getUserById(userId: string): Promise<User | null> {
@@ -115,8 +128,8 @@ export class _UserRepo {
     return rows[0] ? toUser(rows[0]) : null;
   }
 
-  async getUserStatsById(userId: string) {
-    const { rows } = await this.db.query(
+  async getUserStatsById(userId: string): Promise<UserStats[]> {
+    const { rows } = await this.db.query<UserStats>(
       `
         SELECT
         u.id AS "user_id",
@@ -147,14 +160,6 @@ export class _UserRepo {
       [userId],
     );
 
-    return rows.length > 0 ? rows : null;
+    return rows;
   }
 }
-
-/**** LATER ***/
-// catch(err: any) {
-//       // 23505 = Postgres unique_violation (email column is UNIQUE)
-//       if (err.code === "23505") throw new ConflictError("Email already in use");
-//       throw err;
-//     }
-//   }

@@ -27,3 +27,12 @@ export type UpdateUser = {
   email?: string;
   fullName?: string;
 };
+
+export type UserStats = {
+  user_id: string;
+  totalProjects: string;
+  totalTasks: string;
+  completedTasks: string;
+  pendingTasks: string;
+  overdueTasks: string;
+};
