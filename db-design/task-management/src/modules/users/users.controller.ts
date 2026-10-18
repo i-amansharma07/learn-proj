@@ -3,12 +3,16 @@ import { UserService } from "../../container";
 import { asynHandler } from "../../utils/asyncHandler";
 import { ApiResponse } from "../../utils/ApiResponse";
 import { CreateUserDTO, UpdateUserDTO } from "./user.schema";
+import { paginationParams } from "../../utils/schema";
 
 const getAllUsers: RequestHandler = asynHandler(
   async (_req: Request, res: Response) => {
-    const users = await UserService.getAllUsers();
+    const params = res.locals.validated["query"] as paginationParams;
+    const users = await UserService.getAllUsers(params);
 
-    return res.status(201).json(new ApiResponse(users, "User fetched"));
+    return res
+      .status(200)
+      .json(new ApiResponse(users.data, "Users fetched", 200, users.pagination));
   },
 );
 

@@ -80,6 +80,13 @@ export const errorHandler: ErrorRequestHandler = (
           message: "The supplied data violates a data constraint",
         });
 
+      //developement error
+      case "42601":
+        console.log(err);
+        return res.status(400).json({
+          success: false,
+          message: "DB syntax error",
+        });
       default:
         break;
     }

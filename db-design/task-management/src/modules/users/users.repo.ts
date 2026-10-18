@@ -1,5 +1,7 @@
 import { Pool } from "pg";
 import { NewUser, UpdateUser, User, UserStats } from "./user.types";
+import { PaginatedResult, paginationParams } from "../../utils/schema";
+import { paginationType } from "../../utils/pagination";
 
 //private to this file
 type UserRow = {
@@ -7,18 +9,25 @@ type UserRow = {
   email: string;
   full_name: string;
   password_hash: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 };
 
 //snake to camel case
 const toUser = (user: UserRow): User => {
+  if (user.created_at && user.updated_at) {
+    return {
+      id: user.id,
+      email: user.email,
+      fullName: user.full_name,
+      createdAt: user.created_at,
+      updatedAt: user.updated_at,
+    };
+  }
   return {
     id: user.id,
     email: user.email,
     fullName: user.full_name,
-    createdAt: user.created_at,
-    updatedAt: user.updated_at,
   };
 };
 
@@ -27,12 +36,29 @@ const userPublicFields = "id, email, full_name, created_at, updated_at";
 export class _UserRepo {
   constructor(private readonly db: Pool) {}
 
-  async getAllUsers(): Promise<User[]> {
-    const { rows } = await this.db.query<UserRow>(
-      `SELECT *
-      FROM users`,
-    );
-    return rows.map(toUser);
+  async getAllUsers(
+    limit: number,
+    offset: number,
+  ): Promise<PaginatedResult<User>> {
+    const [UserResults, countResults] = await Promise.all([
+      this.db.query<UserRow>(
+        `SELECT id, email, full_name
+        FROM users
+        LIMIT $1 OFFSET $2;
+        `,
+        [limit, offset],
+      ),
+      this.db.query(
+        `SELECT COUNT(*) AS total
+         FROM users
+        `,
+      ),
+    ]);
+
+    const users = UserResults.rows.map(toUser);
+    const count = countResults.rows[0].total;
+
+    return { data: users, total: Number(count) };
   }
 
   async userExistsByMail(userEmail: string): Promise<boolean> {

@@ -5,8 +5,8 @@ export type User = {
   id: string;
   email: string;
   fullName: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 //What the service accepts (plain password)

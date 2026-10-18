@@ -13,10 +13,11 @@ import {
   userParamSchema,
   updateUserSchema,
 } from "./user.schema";
+import { paginationSchema } from "../../utils/schema";
 
 const userRouter = express.Router();
 
-userRouter.get("/", getAllUsers);
+userRouter.get("/", validate(paginationSchema, "query"), getAllUsers);
 userRouter.post("/", validate(createUserSchema, "body"), createUser);
 userRouter.get("/:user_id", validate(userParamSchema, "params"), getUserById);
 userRouter.delete(
