@@ -13,7 +13,10 @@ export const validate = (schema: ZodType, source: RequestSource) => {
 
     //express provides this by default
     res.locals.validated ??= {};
-    res.locals.validated[source] = result.data;
+    res.locals.validated[source] = {
+      ...(result.data as object),
+      ...res.locals.validated[source],
+    };
     next();
   };
 };

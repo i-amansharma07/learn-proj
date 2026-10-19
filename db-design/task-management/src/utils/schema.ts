@@ -19,3 +19,11 @@ export type PaginationResults = {
 };
 
 export type paginationParams = z.infer<typeof paginationSchema>;
+
+//TODO: Add sorting later
+//sorting
+
+export const sortSchema = z.object({
+  sortBy: z.string().min(1).max(50).optional(),
+  order: z.string().min(1).max(50).optional(),
+});

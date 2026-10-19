@@ -1,16 +1,17 @@
 import { _UserRepo } from "./users.repo";
 import { CreateUserInput, NewUser, UpdateUser, UserStats } from "./user.types";
 import { apiError } from "../../utils/apiErrors";
-import { paginationParams } from "../../utils/schema";
+import { paginationParams, userParams } from "../../utils/schema";
 import { getPagination } from "../../utils/pagination";
 
 export class _UserService {
   //receive UserRepo
   constructor(private readonly repo: _UserRepo) {}
 
-  async getAllUsers(params: paginationParams) {
+  async getAllUsers(params: paginationParams & userParams) {
     const { limit, offset, page } = getPagination(params);
-    const results = await this.repo.getAllUsers(limit, offset);
+    const { name } = params;
+    const results = await this.repo.getAllUsers(limit, offset, name);
 
     return {
       data: results.data,

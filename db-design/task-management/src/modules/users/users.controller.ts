@@ -4,15 +4,19 @@ import { asynHandler } from "../../utils/asyncHandler";
 import { ApiResponse } from "../../utils/ApiResponse";
 import { CreateUserDTO, UpdateUserDTO } from "./user.schema";
 import { paginationParams } from "../../utils/schema";
+import { userParams } from "./user.schema";
 
 const getAllUsers: RequestHandler = asynHandler(
   async (_req: Request, res: Response) => {
-    const params = res.locals.validated["query"] as paginationParams;
+    const params = res.locals.validated["query"] as paginationParams &
+      userParams;
     const users = await UserService.getAllUsers(params);
 
     return res
       .status(200)
-      .json(new ApiResponse(users.data, "Users fetched", 200, users.pagination));
+      .json(
+        new ApiResponse(users.data, "Users fetched", 200, users.pagination),
+      );
   },
 );
 

@@ -12,10 +12,16 @@ export const updateUserSchema = z.object({
   fullName: z.string().optional(),
 });
 
-
 export const userParamSchema = z.object({
-  user_id: z.string().uuid()
-})
+  user_id: z.string().uuid(),
+});
+
+//query
+export const userQuerySchema = z.object({
+  name: z.string().min(1).max(50).optional(),
+});
+
+
 
 
 /*
@@ -28,3 +34,4 @@ API contract changes, and the service input changes when business logic changes.
 
 export type CreateUserDTO = z.infer<typeof createUserSchema>;
 export type UpdateUserDTO = z.infer<typeof updateUserSchema>;
+export type userParams = z.infer<typeof userQuerySchema>;

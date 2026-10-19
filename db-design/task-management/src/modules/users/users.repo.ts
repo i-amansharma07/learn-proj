@@ -39,24 +39,42 @@ export class _UserRepo {
   async getAllUsers(
     limit: number,
     offset: number,
+    name?: string,
   ): Promise<PaginatedResult<User>> {
-    const [UserResults, countResults] = await Promise.all([
+    const conditions: string[] = [];
+    const values: (string | number)[] = [];
+
+    if (name) {
+      values.push(`%${name.trim()}%`);
+      conditions.push(`full_name ILIKE $${values.length}`);
+    }
+
+    const whereClause = conditions.length
+      ? `WHERE ${conditions.join(" AND ")}`
+      : "";
+
+    const dbValues = [...values, limit, offset];
+
+    const [userResults, countResults] = await Promise.all([
       this.db.query<UserRow>(
         `SELECT id, email, full_name
         FROM users
-        LIMIT $1 OFFSET $2;
+        ${whereClause}
+        LIMIT $${values.length + 1} OFFSET $${values.length + 2};
         `,
-        [limit, offset],
+        dbValues,
       ),
       this.db.query(
         `SELECT COUNT(*) AS total
          FROM users
+         ${whereClause}
         `,
+        values,
       ),
     ]);
 
-    const users = UserResults.rows.map(toUser);
-    const count = countResults.rows[0].total;
+    const users = userResults.rows.map(toUser);
+    const count = Number(countResults.rows[0].total);
 
     return { data: users, total: Number(count) };
   }
