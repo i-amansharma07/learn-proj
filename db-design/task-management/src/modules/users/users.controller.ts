@@ -2,7 +2,12 @@ import { Request, Response, RequestHandler } from "express";
 import { UserService } from "../../container";
 import { asyncHandler } from "../../utils/asyncHandler";
 import { ApiResponse } from "../../utils/ApiResponse";
-import type { CreateUserDTO, UpdateUserDTO, UserQuery } from "./user.schema";
+import type {
+  CreateUserDTO,
+  UpdateUserDTO,
+  UserQuery,
+  ProfileDTO,
+} from "./user.schema";
 
 const getAllUsers: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
@@ -75,15 +80,35 @@ const getUserStatsById: RequestHandler = asyncHandler(
   },
 );
 
-const createUserWithProfile: RequestHandler = asyncHandler(
+//Profile
+const getUserProfileById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
     const { user_id } = res.locals.validated["params"];
 
-    const userwithProfile = await UserService.createUserWithProfile(user_id);
+    const user = await UserService.getUserProfileById(user_id as string);
+
+    return res.status(200).json(new ApiResponse(user, "User's profile fetched"));
+  },
+);
+const updateUserWithProfile: RequestHandler = asyncHandler(
+  async (_req: Request, res: Response) => {
+    const { user_id } = res.locals.validated["params"];
+    const data = res.locals.validated["body"] as ProfileDTO;
+
+    if (Object.keys(data).length === 0) {
+      return res
+        .status(200)
+        .json(new ApiResponse({}, "No fields provided for update"));
+    }
+
+    const userwithProfile = await UserService.updateUserWithProfile(
+      user_id,
+      data,
+    );
 
     return res
       .status(201)
-      .json(new ApiResponse(userwithProfile, "Profile has been created"));
+      .json(new ApiResponse(userwithProfile, "Profile has been updated"));
   },
 );
 
@@ -94,4 +119,6 @@ export {
   deleteUserById,
   updateUserById,
   getUserStatsById,
+  getUserProfileById,
+  updateUserWithProfile,
 };

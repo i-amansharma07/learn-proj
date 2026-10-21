@@ -2,7 +2,8 @@ import { _UserRepo } from "./users.repo";
 import { CreateUserInput, NewUser, UpdateUser, UserStats } from "./user.types";
 import { apiError } from "../../utils/apiErrors";
 import { getPagination } from "../../utils/pagination";
-import { UserQuery } from "./user.schema";
+import { ProfileDTO, UserQuery } from "./user.schema";
+import { isUniqueViolation } from "../../utils/postgresError";
 
 export class _UserService {
   //receive UserRepo
@@ -25,13 +26,6 @@ export class _UserService {
   }
 
   async createUser(data: CreateUserInput) {
-    // check for existing user
-    const exists = await this.repo.userExistsByMail(data.email);
-
-    if (exists) {
-      throw apiError.conflict("Email already exists");
-    }
-
     const hashedPass = data.password + "hashed";
 
     const user: NewUser = {
@@ -40,7 +34,16 @@ export class _UserService {
       passwordHash: hashedPass,
     };
 
-    const createdUser = await this.repo.createUser(user);
+    let createdUser;
+    try {
+      createdUser = await this.repo.createUser(user);
+    } catch (err) {
+      if (isUniqueViolation(err)) {
+        throw apiError.conflict(
+          "Email already exists, try with some other mail",
+        );
+      }
+    }
     if (!createdUser) {
       throw apiError.internal();
     }
@@ -88,7 +91,23 @@ export class _UserService {
     return stats;
   }
 
-  async createUserWithProfile(userId: string) {
+  //profile
 
+  async getUserProfileById(userId: string) {
+    const user = await this.repo.getUserProfileById(userId);
+    if (!user) {
+      throw apiError.notfound("User Profile with this id don't exists");
+    }
+    return user;
+  }
+
+  async updateUserWithProfile(userId: string, data: ProfileDTO) {
+    const profile = await this.repo.updateUserWithProfile(userId, data);
+
+    if (!profile) {
+      apiError.notfound("Profile with this user id don't exists");
+    }
+
+    return profile;
   }
 }

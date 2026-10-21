@@ -41,13 +41,13 @@ export type UserQuery = z.infer<typeof userQuerySchema>;
 //profile
 const UserStatus = z.enum(["Focus", "Brb", "sick", "AFK"]);
 
-const profileFields = {
+export const profileFields = {
   phone: z
     .string()
     .trim()
     .regex(/^\+?[1-9]\d{6,14}$/, "Invalid phone number")
     .optional(),
-  userStatus: UserStatus,
+  userStatus: UserStatus.optional(),
   age: z.number().min(12).optional(),
   bio: z.string().trim().min(1).max(100).optional(),
 };
@@ -58,3 +58,5 @@ export const UpsertProfileSchema = z.object({
   age: profileFields.age,
   bio: profileFields.bio,
 });
+
+export type ProfileDTO = z.infer<typeof UpsertProfileSchema>;

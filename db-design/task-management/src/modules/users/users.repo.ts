@@ -1,5 +1,7 @@
 import { Pool } from "pg";
-import { NewUser, UpdateUser, User, UserStats } from "./user.types";
+import { NewUser, UpdateUser, User, UserStats, Profile } from "./user.types";
+import { ProfileDTO } from "./user.schema";
+import { apiError } from "../../utils/apiErrors";
 
 //private to this file
 type UserRow = {
@@ -11,8 +13,16 @@ type UserRow = {
   updated_at?: Date;
 };
 
+type UserProfileRow = {
+  age?: string;
+  bio?: string;
+  phone?: string;
+  user_status?: string;
+};
+
 //snake to camel case
-const toUser = (user: UserRow): User => {
+
+const toUser = (user: UserRow & UserProfileRow): User => {
   if (user.created_at && user.updated_at) {
     return {
       id: user.id,
@@ -29,7 +39,42 @@ const toUser = (user: UserRow): User => {
   };
 };
 
+const toProfileUser = (user: UserRow & UserProfileRow): User & Profile => {
+  if (user.created_at && user.updated_at) {
+    return {
+      id: user.id,
+      email: user.email,
+      fullName: user.full_name,
+      age: user.age,
+      bio: user.bio,
+      phone: user.phone,
+      user_status: user.user_status,
+      createdAt: user.created_at,
+      updatedAt: user.updated_at,
+    };
+  }
+  return {
+    id: user.id,
+    email: user.email,
+    fullName: user.full_name,
+    age: user.age,
+    bio: user.bio,
+    phone: user.phone,
+    user_status: user.user_status,
+  };
+};
+
+const toProfile = (profile: UserProfileRow): Profile => {
+  return {
+    age: profile.age,
+    bio: profile.bio,
+    phone: profile.phone,
+    user_status: profile.user_status,
+  };
+};
+
 const userPublicFields = "id, email, full_name, created_at, updated_at";
+const profilePublicFiels = "bio, age, phone, user_status";
 
 export class _UserRepo {
   constructor(private readonly db: Pool) {}
@@ -77,6 +122,7 @@ export class _UserRepo {
     return { data: users, total: Number(count) };
   }
 
+  //not getting used right now
   async userExistsByMail(userEmail: string): Promise<boolean> {
     const { rows } = await this.db.query(
       `
@@ -88,7 +134,7 @@ export class _UserRepo {
     return rows[0].exists;
   }
 
-  //not getting used
+  //not getting used right now
   async userExistsById(userId: string): Promise<boolean> {
     const { rows } = await this.db.query(
       `
@@ -100,15 +146,46 @@ export class _UserRepo {
     return rows[0].exists;
   }
 
+  //create user and profile record
   async createUser(data: NewUser): Promise<User> {
-    const { rows } = await this.db.query<UserRow>(
-      `INSERT INTO users (email, full_name, password_hash)
-      VALUES ($1, $2, $3)
-      RETURNING ${userPublicFields};
+    const client = await this.db.connect();
+    try {
+      await client.query(`BEGIN`);
+      const { rows } = await client.query<UserRow>(
+        `INSERT INTO users (email, full_name, password_hash)
+        VALUES ($1, $2, $3)
+        RETURNING ${userPublicFields};
+        `,
+        [data.email, data.fullName, data.passwordHash],
+      );
+
+      const user = rows[0];
+
+      //extra safety check
+      if (!user) {
+        throw apiError.internal("DB returned zero rows upon user creation");
+      }
+
+      await client.query(
+        `
+        INSERT INTO profiles (user_id)
+        VALUES($1);
       `,
-      [data.email, data.fullName, data.passwordHash],
-    );
-    return rows[0] && toUser(rows[0]);
+        [user.id],
+      );
+
+      await client.query(`COMMIT`);
+      return user && toUser(user);
+    } catch (err) {
+      try {
+        await client.query(`ROLLBACK`);
+      } catch (e) {
+        console.log("Transaction rollback failed", e);
+      }
+      throw err;
+    } finally {
+      client.release();
+    }
   }
 
   async getUserById(userId: string): Promise<User | null> {
@@ -201,5 +278,70 @@ export class _UserRepo {
     );
 
     return rows;
+  }
+
+  //profile
+
+  async getUserProfileById(userId: string): Promise<(User & Profile) | null> {
+    const { rows } = await this.db.query<UserRow>(
+      `
+      SELECT ${userPublicFields
+        .split(",")
+        .map((item) => "u." + item)
+        .join(", ")}, ${profilePublicFiels
+        .split(",")
+        .map((item) => "p." + item)
+        .join(", ")}
+      FROM users u
+      JOIN profiles p
+      ON u.id = p.user_id
+      WHERE id = $1;
+      `,
+      [userId],
+    );
+
+    return rows[0] ? toProfileUser(rows[0]) : null;
+  }
+
+  async updateUserWithProfile(
+    userId: string,
+    data: ProfileDTO,
+  ): Promise<Profile | null> {
+    const fields: string[] = [];
+    const values: unknown[] = [];
+
+    let i = 1;
+    if (data.age !== undefined) {
+      fields.push(`age=$${i++}`);
+      values.push(data.age);
+    }
+
+    if (data.bio !== undefined) {
+      fields.push(`bio=$${i++}`);
+      values.push(data.bio);
+    }
+
+    if (data.phone !== undefined) {
+      fields.push(`phone=$${i++}`);
+      values.push(data.phone);
+    }
+    if (data.user_status !== undefined) {
+      fields.push(`user_status=$${i++}`);
+      values.push(data.user_status);
+    }
+
+    values.push(userId);
+
+    const { rows } = await this.db.query(
+      `
+        UPDATE profiles
+        SET ${fields.join(", ")}
+        WHERE user_id = $${i}
+        RETURNING ${profilePublicFiels}
+      `,
+      values,
+    );
+
+    return rows[0] ? toProfile(rows[0]) : null;
   }
 }

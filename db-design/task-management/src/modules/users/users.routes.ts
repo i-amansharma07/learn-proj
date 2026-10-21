@@ -6,6 +6,8 @@ import {
   getUserById,
   getUserStatsById,
   updateUserById,
+  getUserProfileById,
+  updateUserWithProfile,
 } from "./users.controller";
 import { validate } from "../../middlewares/validate.middleware";
 import {
@@ -13,9 +15,8 @@ import {
   userParamSchema,
   updateUserSchema,
   UpsertProfileSchema,
+  userQuerySchema,
 } from "./user.schema";
-
-import { userQuerySchema } from "./user.schema";
 
 const userRouter = express.Router();
 
@@ -40,11 +41,16 @@ userRouter.get(
 );
 
 //profile
-userRouter.post(
-  "/:user_id",
+userRouter.get(
+  "/:user_id/profile",
+  validate(userParamSchema, "params"),
+  getUserProfileById,
+);
+userRouter.patch(
+  "/:user_id/profile",
   validate(userParamSchema, "params"),
   validate(UpsertProfileSchema, "body"),
+  updateUserWithProfile,
 );
-userRouter.get("/:user_id", validate(userParamSchema, "params"));
 
 export { userRouter };

@@ -11,8 +11,6 @@ app.get("/check", (_req: Request, res: Response) => {
 
 app.get("/todos", (_req: Request, res: Response) => {
   return res.send(`
-    1. postgres erros uniformity.
-    2. can service use another try catch for specific db error.
     3. complete profile journey.
     `);
 });

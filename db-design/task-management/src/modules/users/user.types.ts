@@ -46,3 +46,9 @@ export type UserStats = {
 };
 
 //profile
+export type Profile = {
+  age?: string;
+  phone?: string;
+  bio?: string;
+  user_status?: string;
+};
