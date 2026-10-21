@@ -1,53 +1,28 @@
 import { _UserRepo } from "./users.repo";
 import { CreateUserInput, NewUser, UpdateUser, UserStats } from "./user.types";
 import { apiError } from "../../utils/apiErrors";
-import { paginationParams, userParams } from "../../utils/schema";
 import { getPagination } from "../../utils/pagination";
+import { UserQuery } from "./user.schema";
 
 export class _UserService {
   //receive UserRepo
   constructor(private readonly repo: _UserRepo) {}
 
-  async getAllUsers(params: paginationParams & userParams) {
+  async getAllUsers(params: UserQuery) {
     const { limit, offset, page } = getPagination(params);
     const { name } = params;
-    const results = await this.repo.getAllUsers(limit, offset, name);
+    const { data, total } = await this.repo.getAllUsers(limit, offset, name);
 
     return {
-      data: results.data,
+      data: data,
       pagination: {
         page,
         limit,
-        total: results.total,
-        totalPages: Math.ceil(results.total / limit),
+        total,
+        totalPages: Math.ceil(total / limit),
       },
     };
   }
-
-  /*
-  {
-    data: [
-      {
-        id: 'f2d222ab-c19f-4f89-8b5b-1e605a6b591f',
-        email: 'test1@g.com',
-        fullName: 'Test1 User'
-      },
-      {
-        id: 'e1ac8bc9-f2e7-4a55-b290-b9bed7f63ed6',
-        email: 'test123@g.com',
-        fullName: 'Test1 User'
-      }
-    ],
-    total: 2
-  }
-
-
- {
-  da
- }
-
-
-  */
 
   async createUser(data: CreateUserInput) {
     // check for existing user
@@ -111,5 +86,9 @@ export class _UserService {
     }
 
     return stats;
+  }
+
+  async createUserWithProfile(userId: string) {
+
   }
 }

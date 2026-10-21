@@ -1,7 +1,5 @@
 import { Pool } from "pg";
 import { NewUser, UpdateUser, User, UserStats } from "./user.types";
-import { PaginatedResult, paginationParams } from "../../utils/schema";
-import { paginationType } from "../../utils/pagination";
 
 //private to this file
 type UserRow = {
@@ -40,7 +38,7 @@ export class _UserRepo {
     limit: number,
     offset: number,
     name?: string,
-  ): Promise<PaginatedResult<User>> {
+  ): Promise<{ data: User[]; total: number }> {
     const conditions: string[] = [];
     const values: (string | number)[] = [];
 
@@ -82,27 +80,24 @@ export class _UserRepo {
   async userExistsByMail(userEmail: string): Promise<boolean> {
     const { rows } = await this.db.query(
       `
-        SELECT id
-        FROM users
-        WHERE users.email = $1
+        SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)
       `,
       [userEmail],
     );
 
-    return rows.length > 0;
+    return rows[0].exists;
   }
 
+  //not getting used
   async userExistsById(userId: string): Promise<boolean> {
     const { rows } = await this.db.query(
       `
-        SELECT id
-        FROM users
-        WHERE users.id = $1
+      SELECT EXISTS(SELECT 1 FROM users WHERE id=$1);
       `,
       [userId],
     );
 
-    return rows.length > 0;
+    return rows[0].exists;
   }
 
   async createUser(data: NewUser): Promise<User> {
@@ -143,6 +138,7 @@ export class _UserRepo {
   }
 
   //create trigger for update records
+
   async updateUserById(userId: string, data: UpdateUser): Promise<User | null> {
     const fields: string[] = [];
     const values: unknown[] = [];

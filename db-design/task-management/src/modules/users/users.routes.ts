@@ -12,18 +12,14 @@ import {
   createUserSchema,
   userParamSchema,
   updateUserSchema,
+  UpsertProfileSchema,
 } from "./user.schema";
-import { paginationSchema } from "../../utils/schema";
+
 import { userQuerySchema } from "./user.schema";
 
 const userRouter = express.Router();
 
-userRouter.get(
-  "/",
-  validate(userQuerySchema, "query"),
-  validate(paginationSchema, "query"),
-  getAllUsers,
-);
+userRouter.get("/", validate(userQuerySchema, "query"), getAllUsers);
 userRouter.post("/", validate(createUserSchema, "body"), createUser);
 userRouter.get("/:user_id", validate(userParamSchema, "params"), getUserById);
 userRouter.delete(
@@ -37,11 +33,18 @@ userRouter.patch(
   validate(updateUserSchema, "body"),
   updateUserById,
 );
-
 userRouter.get(
   "/stats/:user_id",
   validate(userParamSchema, "params"),
   getUserStatsById,
 );
+
+//profile
+userRouter.post(
+  "/:user_id",
+  validate(userParamSchema, "params"),
+  validate(UpsertProfileSchema, "body"),
+);
+userRouter.get("/:user_id", validate(userParamSchema, "params"));
 
 export { userRouter };

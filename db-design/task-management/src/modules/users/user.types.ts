@@ -23,9 +23,17 @@ export type NewUser = {
   passwordHash: string;
 };
 
+//user by service
 export type UpdateUser = {
   email?: string;
   fullName?: string;
+};
+
+//used by service
+export type ListUserInput = {
+  name?: string;
+  page: number;
+  limit: number;
 };
 
 export type UserStats = {
@@ -36,3 +44,5 @@ export type UserStats = {
   pendingTasks: string;
   overdueTasks: string;
 };
+
+//profile

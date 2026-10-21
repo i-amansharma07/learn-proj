@@ -2,7 +2,7 @@
 CREATE TYPE task_status AS ENUM ('pending', 'in_progress', 'completed');
 CREATE TYPE project_status AS ENUM ('pending', 'active', 'archived');
 CREATE TYPE member_role AS ENUM ('owner', 'admin', 'member');
-CREATE TYPE user_status AS ENUM ('Focus', 'BRD', 'sick', 'AFK');
+CREATE TYPE user_status AS ENUM ('Focus', 'BRB', 'sick', 'AFK');
 
 
 CREATE TABLE users(
@@ -49,7 +49,7 @@ CREATE TABLE tasks(
     priority SMALLINT NOT NULL DEFAULT 1 CHECK (priority BETWEEN 1 AND 5),
     due_date DATE,
 
-    assigned_to UUID NOT NULL REFERENCES users ON DELETE SET NULL,
+    assigned_to UUID  REFERENCES users ON DELETE SET NULL,
     project_id UUID NOT NULL REFERENCES projects ON DELETE CASCADE,
 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

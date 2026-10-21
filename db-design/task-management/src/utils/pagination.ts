@@ -1,4 +1,4 @@
-import { paginationParams } from "./schema";
+// import { paginationParams } from "./schema";
 
 export type paginationType = {
   page: number;
@@ -6,7 +6,7 @@ export type paginationType = {
   offset: number;
 };
 
-export const getPagination = (params: paginationParams): paginationType => {
+export const getPagination = (params: any): paginationType => {
   const { page, limit } = params;
 
   return {

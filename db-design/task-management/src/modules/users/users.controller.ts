@@ -1,15 +1,12 @@
 import { Request, Response, RequestHandler } from "express";
 import { UserService } from "../../container";
-import { asynHandler } from "../../utils/asyncHandler";
+import { asyncHandler } from "../../utils/asyncHandler";
 import { ApiResponse } from "../../utils/ApiResponse";
-import { CreateUserDTO, UpdateUserDTO } from "./user.schema";
-import { paginationParams } from "../../utils/schema";
-import { userParams } from "./user.schema";
+import type { CreateUserDTO, UpdateUserDTO, UserQuery } from "./user.schema";
 
-const getAllUsers: RequestHandler = asynHandler(
+const getAllUsers: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
-    const params = res.locals.validated["query"] as paginationParams &
-      userParams;
+    const params = res.locals.validated["query"] as UserQuery;
     const users = await UserService.getAllUsers(params);
 
     return res
@@ -20,7 +17,7 @@ const getAllUsers: RequestHandler = asynHandler(
   },
 );
 
-const createUser: RequestHandler = asynHandler(
+const createUser: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
     const data = res.locals.validated["body"] as CreateUserDTO;
 
@@ -30,7 +27,7 @@ const createUser: RequestHandler = asynHandler(
   },
 );
 
-const getUserById: RequestHandler = asynHandler(
+const getUserById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
     const { user_id } = res.locals.validated["params"];
 
@@ -40,7 +37,7 @@ const getUserById: RequestHandler = asynHandler(
   },
 );
 
-const deleteUserById: RequestHandler = asynHandler(
+const deleteUserById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
     const { user_id } = res.locals.validated["params"];
 
@@ -50,7 +47,7 @@ const deleteUserById: RequestHandler = asynHandler(
   },
 );
 
-const updateUserById: RequestHandler = asynHandler(
+const updateUserById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
     const { user_id } = res.locals.validated["params"];
     const userData = res.locals.validated["body"] as UpdateUserDTO;
@@ -68,13 +65,25 @@ const updateUserById: RequestHandler = asynHandler(
   },
 );
 
-const getUserStatsById: RequestHandler = asynHandler(
+const getUserStatsById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
     const { user_id } = res.locals.validated["params"];
 
     const data = await UserService.getUserStatsById(user_id as string);
 
     return res.status(200).json(new ApiResponse(data, "stats fetched"));
+  },
+);
+
+const createUserWithProfile: RequestHandler = asyncHandler(
+  async (_req: Request, res: Response) => {
+    const { user_id } = res.locals.validated["params"];
+
+    const userwithProfile = await UserService.createUserWithProfile(user_id);
+
+    return res
+      .status(201)
+      .json(new ApiResponse(userwithProfile, "Profile has been created"));
   },
 );
 
