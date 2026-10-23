@@ -59,7 +59,7 @@ CREATE TABLE tasks(
 
 --Junction table for users and projects many to many relation
 -- 1 user <----> many projects and 1 project <----> users [many to many relationship bw users and projects so needed this junction table]
-CREATE TABLE project_member(
+CREATE TABLE project_members(
     project_id UUID NOT NULL REFERENCES projects on DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES users on DELETE CASCADE,
     role member_role NOT NUll DEFAULT 'member',

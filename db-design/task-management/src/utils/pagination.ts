@@ -6,6 +6,13 @@ export type paginationType = {
   offset: number;
 };
 
+export type paginationResponse = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
+
 export const getPagination = (params: any): paginationType => {
   const { page, limit } = params;
 

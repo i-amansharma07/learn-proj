@@ -1,4 +1,4 @@
-import express from "express";
+import { Router } from "express";
 import {
   createUser,
   deleteUserById,
@@ -18,7 +18,7 @@ import {
   userQuerySchema,
 } from "./user.schema";
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 userRouter.get("/", validate(userQuerySchema, "query"), getAllUsers);
 userRouter.post("/", validate(createUserSchema, "body"), createUser);

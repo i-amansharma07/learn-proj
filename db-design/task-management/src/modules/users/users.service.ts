@@ -43,9 +43,10 @@ export class _UserService {
           "Email already exists, try with some other mail",
         );
       }
+      throw err;
     }
     if (!createdUser) {
-      throw apiError.internal();
+      throw apiError.internal("Something went wrong while creating user");
     }
     return createdUser;
   }

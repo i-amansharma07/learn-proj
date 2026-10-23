@@ -163,7 +163,9 @@ export class _UserRepo {
 
       //extra safety check
       if (!user) {
-        throw apiError.internal("DB returned zero rows upon user creation");
+        throw apiError.internal(
+          "repo : DB returned zero rows upon user creation",
+        );
       }
 
       await client.query(
@@ -180,7 +182,7 @@ export class _UserRepo {
       try {
         await client.query(`ROLLBACK`);
       } catch (e) {
-        console.log("Transaction rollback failed", e);
+        console.log("Transaction rollback failed while creating user", e);
       }
       throw err;
     } finally {

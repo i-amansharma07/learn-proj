@@ -1,16 +1,16 @@
-import { PaginationResults } from "./schema";
+import { paginationResponse } from "./pagination";
 
 export class ApiResponse<T> {
   private readonly success: boolean;
   private readonly message: string;
-  private readonly pagination?: PaginationResults;
   private readonly data: T;
+  private readonly pagination: paginationResponse | null = null;
 
   constructor(
     data: T,
     message = "Success",
     status = 200,
-    pagination?: PaginationResults,
+    pagination?: paginationResponse,
   ) {
     this.success = status < 400;
     this.data = data;
