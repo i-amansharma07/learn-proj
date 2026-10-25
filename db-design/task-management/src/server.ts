@@ -1,8 +1,7 @@
 import "dotenv/config";
+import { config } from "./config/env";
 import { app } from "./app";
 import { pingDB } from "./db/pool";
-
-
 
 pingDB()
   .then(() => initApp())
@@ -13,7 +12,7 @@ pingDB()
 
 function initApp() {
   app
-    .listen(4000, () => {
+    .listen(config.PORT, () => {
       console.log("server is running on 4000");
     })
     .on("error", (err) => {

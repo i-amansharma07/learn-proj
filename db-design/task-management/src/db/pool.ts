@@ -1,8 +1,7 @@
-
 import { Pool } from "pg";
-
+import { config } from "../config/env";
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL!,
+  connectionString: config.DATABASE_URL,
   // host: "localhost",
   // port: 5432,
   // password: "postgres",
@@ -14,7 +13,7 @@ export const pool = new Pool({
 export const pingDB = async () => {
   try {
     await pool.query("SELECT NOW()");
-    console.log("Database connected");
+    console.log("Database ping completed, DB connected");
   } catch (err: any) {
     console.error(`Failed to connect with DB: ${err.message}`);
     throw err;
