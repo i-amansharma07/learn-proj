@@ -2,7 +2,6 @@ import { CreateProjectDTO, UpdateProjectDTO } from "./project.schema";
 import { Project, UpdateProject } from "./project.types";
 import { _ProjectRepo } from "./project.repo";
 import { apiError } from "../../utils/apiErrors";
-import { tr } from "zod/v4/locales";
 import { isForeignKeyViolation } from "../../utils/postgresError";
 
 export class _ProjectService {
