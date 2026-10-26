@@ -267,7 +267,7 @@ export class _UserRepo {
         ) AS "overdueTasks"
 
       FROM users u
-      left join project_member pm
+      left join project_members pm
       on u.id = pm.user_id
 
       left join tasks t

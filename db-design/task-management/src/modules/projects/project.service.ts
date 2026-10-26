@@ -40,7 +40,7 @@ export class _ProjectService {
   }
 
   async getProjectById(projectId: string): Promise<Project> {
-    let project = await this.repo.getProjectsById(projectId);
+    let project = await this.repo.getProjectById(projectId);
     if (!project) {
       throw apiError.notfound("Project with this Id");
     }
@@ -69,5 +69,12 @@ export class _ProjectService {
     if (deletedRow === 0) {
       throw apiError.notfound("Project with this id");
     }
+  }
+
+  async getUsersProjectsByUserId(userId: string): Promise<Project[]> {
+    const projects: Project[] =
+      await this.repo.getUsersProjectsByUserId(userId);
+
+    return projects;
   }
 }

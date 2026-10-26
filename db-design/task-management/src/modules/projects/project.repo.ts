@@ -70,7 +70,7 @@ export class _ProjectRepo {
     }
   }
 
-  async getProjectsById(projectId: string): Promise<Project> {
+  async getProjectById(projectId: string): Promise<Project> {
     const { rows } = await this.db.query<ProjectRow>(
       `
       SELECT ${projectPublicFields}
@@ -152,5 +152,24 @@ export class _ProjectRepo {
     );
 
     return rowCount ?? 0;
+  }
+
+  async getUsersProjectsByUserId(userId: string): Promise<Project[]> {
+    const { rows } = await this.db.query<ProjectRow>(
+      `
+      SELECT ${projectPublicFields
+        .split(",")
+        .map((item) => `p.${item}`)
+        .join(", ")}
+      FROM project_members pm
+      JOIN projects p
+      on pm.project_id = p.id
+      WHERE pm.user_id = $1
+      ORDER BY p.created_at DESC, p.id DESC;
+      `,
+      [userId],
+    );
+
+    return rows.map((p) => toProject(p));
   }
 }

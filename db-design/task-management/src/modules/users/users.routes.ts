@@ -22,32 +22,32 @@ const userRouter = Router();
 
 userRouter.get("/", validate(userQuerySchema, "query"), getAllUsers);
 userRouter.post("/", validate(createUserSchema, "body"), createUser);
-userRouter.get("/:user_id", validate(userParamSchema, "params"), getUserById);
+userRouter.get("/:userId", validate(userParamSchema, "params"), getUserById);
 userRouter.delete(
-  "/:user_id",
+  "/:userId",
   validate(userParamSchema, "params"),
   deleteUserById,
 );
 userRouter.patch(
-  "/:user_id",
+  "/:userId",
   validate(userParamSchema, "params"),
   validate(updateUserSchema, "body"),
   updateUserById,
 );
 userRouter.get(
-  "/stats/:user_id",
+  "/stats/:userId",
   validate(userParamSchema, "params"),
   getUserStatsById,
 );
 
 //profile
 userRouter.get(
-  "/:user_id/profile",
+  "/:userId/profile",
   validate(userParamSchema, "params"),
   getUserProfileById,
 );
 userRouter.patch(
-  "/:user_id/profile",
+  "/:userId/profile",
   validate(userParamSchema, "params"),
   validate(UpsertProfileSchema, "body"),
   updateUserWithProfile,

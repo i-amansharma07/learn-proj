@@ -14,7 +14,7 @@ const getAllProjects: RequestHandler = asyncHandler(
   },
 );
 
-const getProjectsById: RequestHandler = asyncHandler(
+const getProjectById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
     const { projectId } = res.locals.validated["params"];
     const project = await ProjectService.getProjectById(projectId);
@@ -64,10 +64,23 @@ const deleteProjectById: RequestHandler = asyncHandler(
   },
 );
 
+const getUsersProjectsByUserId: RequestHandler = asyncHandler(
+  async (_req: Request, res: Response) => {
+    const { userId } = await res.locals.validated["params"];
+
+    const projects = await ProjectService.getUsersProjectsByUserId(userId);
+
+    return res
+      .status(200)
+      .json(new ApiResponse(projects, "User's projects fetched"));
+  },
+);
+
 export {
   createProjectWithOwner,
-  getProjectsById,
+  getProjectById,
   getAllProjects,
   updateProjectById,
-  deleteProjectById
+  deleteProjectById,
+  getUsersProjectsByUserId,
 };

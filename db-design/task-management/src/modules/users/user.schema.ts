@@ -19,7 +19,7 @@ export const updateUserSchema = z.strictObject({
 
 //inside the url
 export const userParamSchema = z.strictObject({
-  user_id: z.uuid(),
+  userId: z.uuid(),
 });
 
 //insdie the query params

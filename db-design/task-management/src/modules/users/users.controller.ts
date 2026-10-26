@@ -34,9 +34,9 @@ const createUser: RequestHandler = asyncHandler(
 
 const getUserById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
-    const { user_id } = res.locals.validated["params"];
+    const { userId } = res.locals.validated["params"];
 
-    const user = await UserService.getUserById(user_id as string);
+    const user = await UserService.getUserById(userId as string);
 
     return res.status(200).json(new ApiResponse(user, "User fetched"));
   },
@@ -44,9 +44,9 @@ const getUserById: RequestHandler = asyncHandler(
 
 const deleteUserById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
-    const { user_id } = res.locals.validated["params"];
+    const { userId } = res.locals.validated["params"];
 
-    await UserService.deleteUserById(user_id as string);
+    await UserService.deleteUserById(userId as string);
 
     return res.status(204).send();
   },
@@ -54,7 +54,7 @@ const deleteUserById: RequestHandler = asyncHandler(
 
 const updateUserById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
-    const { user_id } = res.locals.validated["params"];
+    const { userId } = res.locals.validated["params"];
     const userData = res.locals.validated["body"] as UpdateUserDTO;
 
     //for empty patch object
@@ -64,7 +64,7 @@ const updateUserById: RequestHandler = asyncHandler(
         .json(new ApiResponse({}, "No fields provided for update"));
     }
 
-    const user = await UserService.updateUserById(user_id as string, userData);
+    const user = await UserService.updateUserById(userId as string, userData);
 
     return res.status(200).json(new ApiResponse(user, "User updated"));
   },
@@ -72,9 +72,9 @@ const updateUserById: RequestHandler = asyncHandler(
 
 const getUserStatsById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
-    const { user_id } = res.locals.validated["params"];
+    const { userId } = res.locals.validated["params"];
 
-    const data = await UserService.getUserStatsById(user_id as string);
+    const data = await UserService.getUserStatsById(userId as string);
 
     return res.status(200).json(new ApiResponse(data, "stats fetched"));
   },
@@ -83,16 +83,16 @@ const getUserStatsById: RequestHandler = asyncHandler(
 //Profile
 const getUserProfileById: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
-    const { user_id } = res.locals.validated["params"];
+    const { userId } = res.locals.validated["params"];
 
-    const user = await UserService.getUserProfileById(user_id as string);
+    const user = await UserService.getUserProfileById(userId as string);
 
     return res.status(200).json(new ApiResponse(user, "User's profile fetched"));
   },
 );
 const updateUserWithProfile: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {
-    const { user_id } = res.locals.validated["params"];
+    const { userId } = res.locals.validated["params"];
     const data = res.locals.validated["body"] as ProfileDTO;
 
     if (Object.keys(data).length === 0) {
@@ -102,7 +102,7 @@ const updateUserWithProfile: RequestHandler = asyncHandler(
     }
 
     const userwithProfile = await UserService.updateUserWithProfile(
-      user_id,
+      userId,
       data,
     );
 

@@ -7,11 +7,13 @@ import {
 } from "./project.schema";
 import {
   createProjectWithOwner,
-  getProjectsById,
+  getProjectById,
   getAllProjects,
   updateProjectById,
   deleteProjectById,
+  getUsersProjectsByUserId,
 } from "./project.controller";
+import { userParamSchema } from "../users/user.schema";
 
 const projectRouter = Router();
 
@@ -19,7 +21,7 @@ projectRouter.get("/", getAllProjects);
 projectRouter.get(
   "/:projectId",
   validate(projectParamSchema, "params"),
-  getProjectsById,
+  getProjectById,
 );
 projectRouter.post(
   "/",
@@ -36,6 +38,11 @@ projectRouter.delete(
   "/:projectId",
   validate(projectParamSchema, "params"),
   deleteProjectById,
+);
+projectRouter.get(
+  "/user/:userId",
+  validate(userParamSchema, "params"),
+  getUsersProjectsByUserId,
 );
 
 export { projectRouter };
