@@ -96,6 +96,8 @@ export class _UserRepo {
       ? `WHERE ${conditions.join(" AND ")}`
       : "";
 
+    const sortBy = "ORDER BY created_at";
+    const sortOrder = "DESC";
     const dbValues = [...values, limit, offset];
 
     const [userResults, countResults] = await Promise.all([
@@ -103,6 +105,7 @@ export class _UserRepo {
         `SELECT id, email, full_name
         FROM users
         ${whereClause}
+        ${sortBy} ${sortOrder}
         LIMIT $${values.length + 1} OFFSET $${values.length + 2};
         `,
         dbValues,
@@ -124,7 +127,7 @@ export class _UserRepo {
 
   //not getting used right now
   async userExistsByMail(userEmail: string): Promise<boolean> {
-    const { rows } = await this.db.query(
+    const { rows } = await this.db.query<{ exists: boolean }>(
       `
         SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)
       `,
@@ -136,7 +139,7 @@ export class _UserRepo {
 
   //not getting used right now
   async userExistsById(userId: string): Promise<boolean> {
-    const { rows } = await this.db.query(
+    const { rows } = await this.db.query<{ exists: boolean }>(
       `
       SELECT EXISTS(SELECT 1 FROM users WHERE id=$1);
       `,
@@ -247,11 +250,12 @@ export class _UserRepo {
     return rows[0] ? toUser(rows[0]) : null;
   }
 
+
   async getUserStatsById(userId: string): Promise<UserStats[]> {
     const { rows } = await this.db.query<UserStats>(
       `
         SELECT
-        u.id AS "user_id",
+        u.id AS "userId",
         COUNT(DISTINCT pm.project_id) AS "totalProjects",
         COUNT(DISTINCT t.id) AS "totalTasks",
         COUNT(DISTINCT t.id) FILTER(
@@ -267,13 +271,13 @@ export class _UserRepo {
         ) AS "overdueTasks"
 
       FROM users u
-      left join project_members pm
+      LEFT JOIN project_members pm
       on u.id = pm.user_id
 
-      left join tasks t
+      LEFT JOIN tasks t
       on u.id = t.assigned_to
 
-      where u.id = $1
+      WHERE u.id = $1
       GROUP BY u.id
       `,
       [userId],

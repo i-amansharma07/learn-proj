@@ -45,3 +45,24 @@ export type UpdateProject = {
   status?: string;
   description?: string;
 };
+
+export type meta = {
+  name: string;
+  status: projectStatus;
+  ownerId: string;
+  description?: string;
+};
+
+export type stats = {
+  totalMembers: number;
+  totalTasks: number;
+  totalPendingTasks: number;
+  totalInProgressTasks: number;
+  totalCompletedTasks: number;
+  totalOverdueTasks: number;
+};
+
+export type ProjectStats = {
+  meta: meta;
+  stats: stats;
+};

@@ -1,5 +1,5 @@
 import { CreateProjectDTO, UpdateProjectDTO } from "./project.schema";
-import { Project, UpdateProject } from "./project.types";
+import { Project, ProjectStats, UpdateProject } from "./project.types";
 import { _ProjectRepo } from "./project.repo";
 import { apiError } from "../../utils/apiErrors";
 import { isForeignKeyViolation } from "../../utils/postgresError";
@@ -75,5 +75,11 @@ export class _ProjectService {
       await this.repo.getUsersProjectsByUserId(userId);
 
     return projects;
+  }
+
+  async getProjectStatsById(projectId: string): Promise<ProjectStats> {
+    const stats = await this.repo.getProjectStatsById(projectId);
+
+    return stats;
   }
 }

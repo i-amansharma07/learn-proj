@@ -17,6 +17,7 @@ import {
   UpsertProfileSchema,
   userQuerySchema,
 } from "./user.schema";
+import { getUsersProjectsByUserId } from "../projects/project.controller";
 
 const userRouter = Router();
 
@@ -51,6 +52,13 @@ userRouter.patch(
   validate(userParamSchema, "params"),
   validate(UpsertProfileSchema, "body"),
   updateUserWithProfile,
+);
+
+//get user's project
+userRouter.get(
+  "/:userId/projects",
+  validate(userParamSchema, "params"),
+  getUsersProjectsByUserId,
 );
 
 export { userRouter };

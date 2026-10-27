@@ -4,6 +4,9 @@ import {
   ProjectRow,
   Project,
   UpdateProject,
+  ProjectStats,
+  meta,
+  stats,
 } from "./project.types";
 import { apiError } from "../../utils/apiErrors";
 
@@ -16,6 +19,29 @@ const toProject = (project: ProjectRow): Project => {
     description: project.description,
     status: project.status,
     ownerId: project.owner_id,
+  };
+};
+
+const toProjectStats = (stats: meta & stats): ProjectStats => {
+  const metaData = {
+    name: stats.name,
+    ownerId: stats.ownerId,
+    status: stats.status,
+    description: stats.description,
+  };
+
+  const projectStats = {
+    totalMembers: stats.totalMembers,
+    totalTasks: stats.totalTasks,
+    totalPendingTasks: stats.totalPendingTasks,
+    totalInProgressTasks: stats.totalInProgressTasks,
+    totalCompletedTasks: stats.totalCompletedTasks,
+    totalOverdueTasks: stats.totalOverdueTasks,
+  };
+
+  return {
+    meta: metaData,
+    stats: projectStats,
   };
 };
 
@@ -171,5 +197,45 @@ export class _ProjectRepo {
     );
 
     return rows.map((p) => toProject(p));
+  }
+
+  //test this end point after implementing Tasks
+  async getProjectStatsById(projectId: string): Promise<ProjectStats> {
+    const { rows } = await this.db.query(
+      `
+      SELECT p.name, p.status, p.owner_id AS "ownerId", p.description,
+        COUNT(DISTINCT pm.user_id) AS "totalMembers",
+        COUNT(DISTINCT t.id) AS "totalTasks",
+        COUNT (DISTINCT t.id) FILTER (
+        WHERE t.status = 'pending'
+        ) AS "totalPendingTasks",
+        COUNT (DISTINCT t.id) FILTER (
+        WHERE t.status = 'in_progress'
+        ) AS "totalInProgressTasks",
+        COUNT(DISTINCT t.id) FILTER(
+        WHERE t.status = 'completed'
+        ) AS "totalCompletedTasks",
+        COUNT (DISTINCT t.id) FILTER (
+        WHERE t.status != 'completed'
+        AND
+        t.due_date < CURRENT_DATE
+        ) AS "totalOverdueTasks"
+
+
+        FROM projects p
+        LEFT JOIN tasks t
+        on p.id = t.project_id
+
+        LEFT JOIN project_members pm
+        on p.id = pm.project_id
+
+
+        WHERE p.id = $1
+        GROUP BY p.id;
+      `,
+      [projectId],
+    );
+
+    return toProjectStats(rows[0]);
   }
 }

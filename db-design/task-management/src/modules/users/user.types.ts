@@ -37,7 +37,7 @@ export type ListUserInput = {
 };
 
 export type UserStats = {
-  user_id: string;
+  userId: string;
   totalProjects: string;
   totalTasks: string;
   completedTasks: string;

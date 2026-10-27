@@ -76,6 +76,18 @@ const getUsersProjectsByUserId: RequestHandler = asyncHandler(
   },
 );
 
+const getProjectStatsById: RequestHandler = asyncHandler(
+  async (_req: Request, res: Response) => {
+    const { projectId } = res.locals.validated["params"];
+
+    const stats = await ProjectService.getProjectStatsById(projectId);
+
+    return res
+      .status(200)
+      .json(new ApiResponse(stats, "Project Stats Fetched"));
+  },
+);
+
 export {
   createProjectWithOwner,
   getProjectById,
@@ -83,4 +95,5 @@ export {
   updateProjectById,
   deleteProjectById,
   getUsersProjectsByUserId,
+  getProjectStatsById,
 };

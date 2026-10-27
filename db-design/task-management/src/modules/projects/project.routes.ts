@@ -12,6 +12,7 @@ import {
   updateProjectById,
   deleteProjectById,
   getUsersProjectsByUserId,
+  getProjectStatsById,
 } from "./project.controller";
 import { userParamSchema } from "../users/user.schema";
 
@@ -39,10 +40,11 @@ projectRouter.delete(
   validate(projectParamSchema, "params"),
   deleteProjectById,
 );
+
 projectRouter.get(
-  "/user/:userId",
-  validate(userParamSchema, "params"),
-  getUsersProjectsByUserId,
+  "/:projectId/stats",
+  validate(projectParamSchema, "params"),
+  getProjectStatsById,
 );
 
 export { projectRouter };
