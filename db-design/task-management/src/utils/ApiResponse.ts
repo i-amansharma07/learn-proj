@@ -4,7 +4,7 @@ export class ApiResponse<T> {
   private readonly success: boolean;
   private readonly message: string;
   private readonly data: T;
-  private readonly pagination: paginationResponse | null = null;
+  private readonly pagination?: paginationResponse;
 
   constructor(
     data: T,
@@ -15,6 +15,6 @@ export class ApiResponse<T> {
     this.success = status < 400;
     this.data = data;
     this.message = message;
-    if (pagination) this.pagination = pagination;
+    if (pagination !== undefined) this.pagination = pagination;
   }
 }

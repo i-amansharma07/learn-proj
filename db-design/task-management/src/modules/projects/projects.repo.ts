@@ -7,7 +7,7 @@ import {
   ProjectStats,
   meta,
   stats,
-} from "./project.types";
+} from "./projects.types";
 import { apiError } from "../../utils/apiErrors";
 
 const projectPublicFields = `id, name, status, owner_id, description, created_at, updated_at`;
@@ -23,6 +23,7 @@ const toProject = (project: ProjectRow): Project => {
 };
 
 const toProjectStats = (stats: meta & stats): ProjectStats => {
+  console.log(stats);
   const metaData = {
     name: stats.name,
     ownerId: stats.ownerId,
@@ -97,7 +98,7 @@ export class _ProjectRepo {
   }
 
   async getProjectById(projectId: string): Promise<Project> {
-    const { rows } = await this.db.query<ProjectRow>(
+    const { rowCount, rows } = await this.db.query<ProjectRow>(
       `
       SELECT ${projectPublicFields}
       FROM projects
@@ -106,13 +107,11 @@ export class _ProjectRepo {
       [projectId],
     );
 
-    const row = rows[0];
-
-    if (!row) {
-      throw apiError.internal("Error while getting project By Id");
+    if (rowCount === 0) {
+      throw apiError.notfound("Project with this id");
     }
 
-    return toProject(row);
+    return toProject(rows[0]);
   }
 
   async getAllProjects(): Promise<Project[]> {
@@ -200,7 +199,7 @@ export class _ProjectRepo {
   }
 
   //test this end point after implementing Tasks
-  async getProjectStatsById(projectId: string): Promise<ProjectStats> {
+  async getProjectStatsById(projectId: string): Promise<ProjectStats | null> {
     const { rows } = await this.db.query(
       `
       SELECT p.name, p.status, p.owner_id AS "ownerId", p.description,
@@ -236,6 +235,6 @@ export class _ProjectRepo {
       [projectId],
     );
 
-    return toProjectStats(rows[0]);
+    return rows[0] ? toProjectStats(rows[0]) : null;
   }
 }

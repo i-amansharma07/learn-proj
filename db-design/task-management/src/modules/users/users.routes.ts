@@ -16,8 +16,9 @@ import {
   updateUserSchema,
   UpsertProfileSchema,
   userQuerySchema,
-} from "./user.schema";
-import { getUsersProjectsByUserId } from "../projects/project.controller";
+} from "./users.schema";
+import { getUsersProjectsByUserId } from "../projects/projects.controller";
+import { getUserWithIdTasks } from "../tasks/tasks.controller";
 
 const userRouter = Router();
 
@@ -59,6 +60,13 @@ userRouter.get(
   "/:userId/projects",
   validate(userParamSchema, "params"),
   getUsersProjectsByUserId,
+);
+
+//get user's tasks
+userRouter.get(
+  "/:userId/tasks",
+  validate(userParamSchema, "params"),
+  getUserWithIdTasks,
 );
 
 export { userRouter };

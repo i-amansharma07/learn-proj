@@ -1,7 +1,7 @@
 import { ApiResponse } from "../../utils/ApiResponse";
 import { RequestHandler, Request, Response } from "express";
 import { asyncHandler } from "../../utils/asyncHandler";
-import { CreateProjectDTO, UpdateProjectDTO } from "./project.schema";
+import { CreateProjectDTO, UpdateProjectDTO } from "./projects.schema";
 import { ProjectService } from "../../container";
 
 const getAllProjects: RequestHandler = asyncHandler(

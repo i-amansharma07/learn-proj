@@ -94,7 +94,8 @@ export const errorHandler: ErrorRequestHandler = (
 
   console.error("Unhandled error:", err);
 
-  return res
-    .status(500)
-    .json(new ApiResponse({}, "Unexpected Error at our end", 500));
+  return res.status(500).json({
+    success: false,
+    message: "Unexpected Error at our end",
+  });
 };

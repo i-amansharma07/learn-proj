@@ -4,17 +4,16 @@ import {
   createProjectSchema,
   projectParamSchema,
   updateProjectShema,
-} from "./project.schema";
+} from "./projects.schema";
 import {
   createProjectWithOwner,
   getProjectById,
   getAllProjects,
   updateProjectById,
   deleteProjectById,
-  getUsersProjectsByUserId,
   getProjectStatsById,
-} from "./project.controller";
-import { userParamSchema } from "../users/user.schema";
+} from "./projects.controller";
+import { getProjectWithIdTasks } from "../tasks/tasks.controller";
 
 const projectRouter = Router();
 
@@ -45,6 +44,13 @@ projectRouter.get(
   "/:projectId/stats",
   validate(projectParamSchema, "params"),
   getProjectStatsById,
+);
+
+//get project's tasks
+projectRouter.get(
+  "/:projectId/tasks",
+  validate(projectParamSchema, "params"),
+  getProjectWithIdTasks,
 );
 
 export { projectRouter };

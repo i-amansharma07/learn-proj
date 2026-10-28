@@ -7,7 +7,7 @@ import type {
   UpdateUserDTO,
   UserQuery,
   ProfileDTO,
-} from "./user.schema";
+} from "./users.schema";
 
 const getAllUsers: RequestHandler = asyncHandler(
   async (_req: Request, res: Response) => {

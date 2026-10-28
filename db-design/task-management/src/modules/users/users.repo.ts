@@ -1,6 +1,6 @@
 import { Pool } from "pg";
-import { NewUser, UpdateUser, User, UserStats, Profile } from "./user.types";
-import { ProfileDTO } from "./user.schema";
+import { NewUser, UpdateUser, User, UserStats, Profile } from "./users.types";
+import { ProfileDTO } from "./users.schema";
 import { apiError } from "../../utils/apiErrors";
 
 //private to this file
@@ -141,7 +141,7 @@ export class _UserRepo {
   async userExistsById(userId: string): Promise<boolean> {
     const { rows } = await this.db.query<{ exists: boolean }>(
       `
-      SELECT EXISTS(SELECT 1 FROM users WHERE id=$1);
+      SELECT EXISTS(SELECT 1 FROM users WHERE id=$1) AS exists;
       `,
       [userId],
     );
@@ -249,7 +249,6 @@ export class _UserRepo {
 
     return rows[0] ? toUser(rows[0]) : null;
   }
-
 
   async getUserStatsById(userId: string): Promise<UserStats[]> {
     const { rows } = await this.db.query<UserStats>(

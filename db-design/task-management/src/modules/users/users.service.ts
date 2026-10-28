@@ -1,8 +1,8 @@
 import { _UserRepo } from "./users.repo";
-import { CreateUserInput, NewUser, UpdateUser, UserStats } from "./user.types";
+import { CreateUserInput, NewUser, UpdateUser, UserStats } from "./users.types";
 import { apiError } from "../../utils/apiErrors";
 import { getPagination } from "../../utils/pagination";
-import { ProfileDTO, UserQuery } from "./user.schema";
+import { ProfileDTO, UserQuery } from "./users.schema";
 import { isUniqueViolation } from "../../utils/postgresError";
 
 export class _UserService {

@@ -1,11 +1,15 @@
-import { CreateProjectDTO, UpdateProjectDTO } from "./project.schema";
-import { Project, ProjectStats, UpdateProject } from "./project.types";
-import { _ProjectRepo } from "./project.repo";
+import { CreateProjectDTO, UpdateProjectDTO } from "./projects.schema";
+import { Project, ProjectStats, UpdateProject } from "./projects.types";
+import { _ProjectRepo } from "./projects.repo";
 import { apiError } from "../../utils/apiErrors";
 import { isForeignKeyViolation } from "../../utils/postgresError";
+import { _UserRepo } from "../users/users.repo";
 
 export class _ProjectService {
-  constructor(private readonly repo: _ProjectRepo) {}
+  constructor(
+    private readonly repo: _ProjectRepo,
+    private readonly userRepo: _UserRepo,
+  ) {}
 
   async getAllProjects(): Promise<Project[]> {
     const projects = await this.repo.getAllProjects();
@@ -40,9 +44,6 @@ export class _ProjectService {
 
   async getProjectById(projectId: string): Promise<Project> {
     let project = await this.repo.getProjectById(projectId);
-    if (!project) {
-      throw apiError.notfound("Project with this Id");
-    }
 
     return project;
   }
@@ -74,12 +75,22 @@ export class _ProjectService {
     const projects: Project[] =
       await this.repo.getUsersProjectsByUserId(userId);
 
+    if (
+      projects.length === 0 &&
+      !(await this.userRepo.userExistsById(userId))
+    ) {
+      throw apiError.notfound("User with this id");
+    }
+
     return projects;
   }
 
   async getProjectStatsById(projectId: string): Promise<ProjectStats> {
     const stats = await this.repo.getProjectStatsById(projectId);
 
+    if (!stats) {
+      throw apiError.notfound("Project with this id");
+    }
     return stats;
   }
 }

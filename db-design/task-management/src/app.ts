@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { userRouter } from "./modules/users/users.routes";
-import { projectRouter } from "./modules/projects/project.routes";
+import { projectRouter } from "./modules/projects/projects.routes";
+import { tasksRouter } from "./modules/tasks/tasks.routes";
 import { errorHandler } from "./middlewares/error.middlware";
 
 const app = express();
@@ -21,6 +22,9 @@ app.use("/api/v1/users", userRouter);
 
 //project routes
 app.use("/api/v1/projects", projectRouter);
+
+//task routes
+app.use("/api/v1/tasks", tasksRouter);
 
 app.use(errorHandler);
 

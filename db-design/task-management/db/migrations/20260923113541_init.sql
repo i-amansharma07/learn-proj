@@ -17,7 +17,7 @@ CREATE TABLE users(
 
 -- 1 <-> 1 with user's table - 1 user can have at most 1 profile (extension table)
 CREATE TABLE profiles(
-    user_id UUID PRIMARY KEY REFERENCES users ON DELETE CASCADE,
+    user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
     phone TEXT,
     user_status user_status,
     age SMALLINT,
@@ -33,10 +33,25 @@ CREATE TABLE projects(
     name TEXT NOT NULL,
     description TEXT,
     status project_status NOT NULL DEFAULT 'active',
-    owner_id UUID NOT NULL  REFERENCES users ON DELETE RESTRICT,
+    owner_id UUID NOT NULL  REFERENCES users(id) ON DELETE RESTRICT,
 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+--Junction table for users and projects many to many relation
+-- 1 user <----> many projects and 1 project <----> users [many to many relationship bw users and projects so needed this junction table]
+CREATE TABLE project_members(
+    project_id UUID NOT NULL REFERENCES projects(id) on DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES users(id) on DELETE CASCADE,
+    role member_role NOT NUll DEFAULT 'member',
+
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY(project_id, user_id)
 );
 
 
@@ -49,42 +64,18 @@ CREATE TABLE tasks(
     priority SMALLINT NOT NULL DEFAULT 1 CHECK (priority BETWEEN 1 AND 5),
     due_date DATE,
 
-    assigned_to UUID  REFERENCES users ON DELETE SET NULL,
-    project_id UUID NOT NULL REFERENCES projects ON DELETE CASCADE,
+    assigned_to UUID  REFERENCES users(id) ON DELETE SET NULL,
+    project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+
+    -- only the memeber of the project can be assigned task of that project
+    CONSTRAINT tasks_assignee_is_project_member_fkey
+    FOREIGN KEY (project_id, assigned_to)
+    REFERENCES project_members (project_id, user_id)
+    ON DELETE SET NULL (assigned_to),
 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
-
-
---Junction table for users and projects many to many relation
--- 1 user <----> many projects and 1 project <----> users [many to many relationship bw users and projects so needed this junction table]
-CREATE TABLE project_members(
-    project_id UUID NOT NULL REFERENCES projects on DELETE CASCADE,
-    user_id UUID NOT NULL REFERENCES users on DELETE CASCADE,
-    role member_role NOT NUll DEFAULT 'member',
-
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-
-    PRIMARY KEY(project_id, user_id)
-);
-
---SELECT * FROM project_members WHERE project_id = $1 AND user_id = $2; (uses index directly)
--- SELECT * FROM project_members WHERE project_id = $1; (still uses index as first queried by first index)
--- SELECT * FROM project_members WHERE user_id =  $1; (done use index, it's sequential scan as it uses second column of index)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 -- migrate:down
