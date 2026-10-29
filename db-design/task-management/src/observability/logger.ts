@@ -30,7 +30,7 @@ function getLogLevel(): LogLevel {
 const pinoLogger = pino({
   level: getLogLevel(), //starting point of severity
   base: {
-    service: "task-management-api",
+    // service: "task-management-api",
     environment: config.NODE_ENV ?? "development",
   },
   timestamp: pino.stdTimeFunctions.isoTime,
@@ -40,6 +40,17 @@ const pinoLogger = pino({
   redact: {
     paths: ["password", "password_hash"], //exclude logging these
   },
+  ...(config.NODE_ENV === "development" && {
+    transport: {
+      target: "pino-pretty",
+      options: {
+        colorize: true,
+        translateTime: "SYS:standard",
+        ignore: "pid,hostname",
+        singleLine: false,
+      },
+    },
+  }),
 });
 
 export const logger = {
