@@ -1,5 +1,8 @@
 import { Pool } from "pg";
 import { config } from "../config/env";
+import { logger } from "../observability/logger";
+import { serialiseError } from "../utils/helper";
+
 export const pool = new Pool({
   connectionString: config.DATABASE_URL,
   // host: "localhost",
@@ -7,15 +10,53 @@ export const pool = new Pool({
   // password: "postgres",
   // database: "app_db",
   // user: "postgres",
-  // connectionTimeoutMillis: 3000,
+  idleTimeoutMillis: 10000, //connection will wait after which it dies (cleanup)
+  max: 20,
+  connectionTimeoutMillis: 10000, //app waits for getting a connection with db (new connection to pool)
 });
 
+//a new connection will be
+//created and stored in pool after use in this call
 export const pingDB = async () => {
   try {
     await pool.query("SELECT NOW()");
-    console.log("Database ping completed, DB connected");
-  } catch (err: any) {
-    console.error(`Failed to connect with DB: ${err.message}`);
+    logger.info(
+      { layer: "startup", operation: "pingDB" },
+      "Database connection verified",
+    );
+  } catch (error) {
+    const err = serialiseError(error);
+    logger.error(
+      {
+        layer: "startup",
+        operation: "pingDB failed",
+        err,
+      },
+      "DB startup failed",
+    );
     throw err;
   }
 };
+
+export const disconnectDB = async () => {
+  logger.info(
+    { layer: "shutdown", operation: "disconnectDB" },
+    "Diconnecting DB",
+  );
+  try {
+    await pool.end();
+    logger.info(
+      { layer: "shutdown", operation: "disconnectDB" },
+      "DB disconnected",
+    );
+  } catch (error) {
+    const err = serialiseError(error);
+    logger.error(
+      { layer: "shutdown", operation: "disconnectDB", err },
+      "Error disconnecting db",
+    );
+    throw err;
+  }
+};
+
+export const dbHealthCheck = () => pingDB;

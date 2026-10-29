@@ -6,6 +6,7 @@ const envSchema = z.strictObject({
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
+  LOG_LEVEL: z.string().trim().min(1, "LOG_LEVEL is required"),
 });
 
 const getEnv = (key: string): string | undefined => process.env[key];
@@ -14,6 +15,7 @@ const result = envSchema.safeParse({
   DATABASE_URL: getEnv("DATABASE_URL"),
   PORT: getEnv("PORT"),
   NODE_ENV: getEnv("NODE_ENV"),
+  LOG_LEVEL: getEnv("LOG_LEVEL"),
 });
 
 if (!result.success) {
