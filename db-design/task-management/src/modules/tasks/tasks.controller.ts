@@ -1,4 +1,4 @@
-import { RequestHandler, Request, Response } from "express";
+import type { RequestHandler, Request, Response } from "express";
 import { ApiResponse } from "../../utils/ApiResponse";
 import { CreateTaskDTO, UpdateTaskDTO } from "./tasks.schema";
 import { asyncHandler } from "../../utils/asyncHandler";

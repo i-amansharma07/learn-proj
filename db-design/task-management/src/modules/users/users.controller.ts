@@ -1,4 +1,4 @@
-import { Request, Response, RequestHandler } from "express";
+import type { Request, Response, RequestHandler } from "express";
 import { UserService } from "../../container";
 import { asyncHandler } from "../../utils/asyncHandler";
 import { ApiResponse } from "../../utils/ApiResponse";
@@ -87,7 +87,9 @@ const getUserProfileById: RequestHandler = asyncHandler(
 
     const user = await UserService.getUserProfileById(userId as string);
 
-    return res.status(200).json(new ApiResponse(user, "User's profile fetched"));
+    return res
+      .status(200)
+      .json(new ApiResponse(user, "User's profile fetched"));
   },
 );
 const updateUserWithProfile: RequestHandler = asyncHandler(

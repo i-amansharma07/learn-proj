@@ -1,6 +1,7 @@
 import pino from "pino";
+import { getRequestContext } from "./requestContext";
 import { config } from "../config/env";
-import { LogContext, ErrorContext } from "./log-events";
+import { LogContext, ErrorContext, HttpLogContext } from "./log-events";
 
 const LOG_LEVELS = ["debug", "info", "warn", "error"] as const;
 
@@ -27,7 +28,7 @@ function getLogLevel(): LogLevel {
   );
 }
 
-const pinoLogger = pino({
+export const pinoLogger = pino({
   level: getLogLevel(), //starting point of severity
   base: {
     // service: "task-management-api",
@@ -53,20 +54,35 @@ const pinoLogger = pino({
   }),
 });
 
-export const logger = {
-  debug(context: LogContext, message: string) {
-    pinoLogger.debug(context, message);
-  },
-  info(context: LogContext, message: string) {
-    pinoLogger.info(context, message);
-  },
-  warn(context: LogContext, message: string) {
-    pinoLogger.warn(context, message);
-  },
-  error(context: ErrorContext, message: string) {
-    pinoLogger.error(context, message);
-  },
-  fatal(context: ErrorContext, message: string) {
-    pinoLogger.fatal(context, message);
-  },
-};
+export function createLogger(pinoInstance: pino.Logger) {
+  return {
+    debug(context: LogContext, message: string) {
+      pinoInstance.debug(context, message);
+    },
+
+    info(context: LogContext, message: string) {
+      pinoInstance.info(context, message);
+    },
+
+    warn(context: LogContext, message: string) {
+      pinoInstance.warn(context, message);
+    },
+
+    error(context: ErrorContext, message: string) {
+      pinoInstance.error(context, message);
+    },
+
+    fatal(context: ErrorContext, message: string) {
+      pinoInstance.fatal(context, message);
+    },
+    http(context: HttpLogContext, message: string) {
+      pinoInstance.info(context, message);
+    },
+  };
+}
+
+export const logger = createLogger(pinoLogger);
+
+export const getLogger = () => getRequestContext()?.logger ?? logger;
+
+export type ReturnTypeOfLogger = ReturnType<typeof createLogger>;

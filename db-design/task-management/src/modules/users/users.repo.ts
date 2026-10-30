@@ -2,6 +2,8 @@ import { Pool } from "pg";
 import { NewUser, UpdateUser, User, UserStats, Profile } from "./users.types";
 import { ProfileDTO } from "./users.schema";
 import { apiError } from "../../utils/apiErrors";
+import { serialiseError } from "../../utils/helper";
+import { getLogger } from "../../observability/logger";
 
 //private to this file
 type UserRow = {
@@ -84,6 +86,7 @@ export class _UserRepo {
     offset: number,
     name?: string,
   ): Promise<{ data: User[]; total: number }> {
+    const logger = getLogger();
     const conditions: string[] = [];
     const values: (string | number)[] = [];
 
@@ -120,9 +123,14 @@ export class _UserRepo {
     ]);
 
     const users = userResults.rows.map(toUser);
-    const count = Number(countResults.rows[0].total);
+    const total = Number(countResults.rows[0].total);
 
-    return { data: users, total: Number(count) };
+    logger.debug(
+      { layer: "repository", operation: "getAllUsers", rowsFetched: total },
+      "Get all users query executed",
+    );
+
+    return { data: users, total };
   }
 
   //not getting used right now
@@ -151,6 +159,7 @@ export class _UserRepo {
 
   //create user and profile record
   async createUser(data: NewUser): Promise<User> {
+    const logger = getLogger();
     const client = await this.db.connect();
     try {
       await client.query(`BEGIN`);
@@ -166,6 +175,14 @@ export class _UserRepo {
 
       //extra safety check
       if (!user) {
+        logger.error(
+          {
+            layer: "repository",
+            operation: "user.createUser",
+            err: new Error("DB returned zero rows upon user creation"),
+          },
+          "Db retuned no rows upon creation",
+        );
         throw apiError.internal(
           "repo : DB returned zero rows upon user creation",
         );
@@ -180,21 +197,52 @@ export class _UserRepo {
       );
 
       await client.query(`COMMIT`);
+
+      logger.debug(
+        { layer: "repository", operation: "user.createUser" },
+        "Create User db query executed",
+      );
+
       return user && toUser(user);
     } catch (err) {
+      logger.error(
+        {
+          layer: "repository",
+          operation: "user.createUser",
+          err: serialiseError(err),
+        },
+        "error while creating user",
+      );
       try {
+        logger.info(
+          { layer: "repository", operation: "user.createUser" },
+          "Rolling back",
+        );
         await client.query(`ROLLBACK`);
       } catch (e) {
-        console.log("Transaction rollback failed while creating user", e);
+        logger.error(
+          {
+            layer: "repository",
+            operation: "user.createUser",
+            err: serialiseError(e),
+          },
+          "Error while rolling backs",
+        );
+        throw e;
       }
       throw err;
     } finally {
       client.release();
+      logger.info(
+        { layer: "repository", operation: "user.createUser" },
+        "Released db connection",
+      );
     }
   }
 
   async getUserById(userId: string): Promise<User | null> {
-    const { rows } = await this.db.query<UserRow>(
+    const logger = getLogger();
+    const { rows, rowCount } = await this.db.query<UserRow>(
       `
       SELECT ${userPublicFields}
       FROM users
@@ -203,16 +251,31 @@ export class _UserRepo {
       [userId],
     );
 
+    logger.debug(
+      {
+        layer: "repository",
+        operation: "user.getUserById",
+        rowsFetched: rowCount!,
+      },
+      "getUserById db query executed",
+    );
+
     return rows[0] ? toUser(rows[0]) : null;
   }
 
   async deleteUserById(userId: string): Promise<number> {
+    const logger = getLogger();
     const { rowCount } = await this.db.query(
       `
       DELETE FROM users
       where id = $1
       `,
       [userId],
+    );
+
+    logger.debug(
+      { layer: "repository", operation: "deleteUserById" },
+      "Delete user query executed",
     );
 
     // 1 means user deleted else not deleted
@@ -222,6 +285,7 @@ export class _UserRepo {
   //create trigger for update records
 
   async updateUserById(userId: string, data: UpdateUser): Promise<User | null> {
+    const logger = getLogger();
     const fields: string[] = [];
     const values: unknown[] = [];
     let i = 1;
@@ -247,10 +311,16 @@ export class _UserRepo {
       values,
     );
 
+    logger.debug(
+      { layer: "repository", operation: "user.updateUserById" },
+      "update user query executed",
+    );
+
     return rows[0] ? toUser(rows[0]) : null;
   }
 
   async getUserStatsById(userId: string): Promise<UserStats[]> {
+    const logger = getLogger();
     const { rows } = await this.db.query<UserStats>(
       `
         SELECT
@@ -281,13 +351,17 @@ export class _UserRepo {
       `,
       [userId],
     );
-
+    logger.debug(
+      { layer: "repository", operation: "user.getUserStatsById" },
+      "user stats query executed",
+    );
     return rows;
   }
 
   //profile
 
   async getUserProfileById(userId: string): Promise<(User & Profile) | null> {
+    const logger = getLogger();
     const { rows } = await this.db.query<UserRow>(
       `
       SELECT ${userPublicFields
@@ -305,6 +379,10 @@ export class _UserRepo {
       [userId],
     );
 
+    logger.debug(
+      { layer: "repository", operation: "user.getUserProfileById" },
+      "get user profile query executed",
+    );
     return rows[0] ? toProfileUser(rows[0]) : null;
   }
 
@@ -312,6 +390,7 @@ export class _UserRepo {
     userId: string,
     data: ProfileDTO,
   ): Promise<Profile | null> {
+    const logger = getLogger();
     const fields: string[] = [];
     const values: unknown[] = [];
 
@@ -345,6 +424,11 @@ export class _UserRepo {
         RETURNING ${profilePublicFiels}
       `,
       values,
+    );
+
+    logger.debug(
+      { layer: "repository", operation: "user.updateUserWithProfile" },
+      "User profile update query executed",
     );
 
     return rows[0] ? toProfile(rows[0]) : null;

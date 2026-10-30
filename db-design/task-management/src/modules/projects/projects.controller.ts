@@ -1,5 +1,5 @@
 import { ApiResponse } from "../../utils/ApiResponse";
-import { RequestHandler, Request, Response } from "express";
+import type { RequestHandler, Request, Response } from "express";
 import { asyncHandler } from "../../utils/asyncHandler";
 import { CreateProjectDTO, UpdateProjectDTO } from "./projects.schema";
 import { ProjectService } from "../../container";

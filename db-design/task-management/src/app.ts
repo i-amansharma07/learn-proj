@@ -3,8 +3,12 @@ import { userRouter } from "./modules/users/users.routes";
 import { projectRouter } from "./modules/projects/projects.routes";
 import { tasksRouter } from "./modules/tasks/tasks.routes";
 import { errorHandler } from "./middlewares/error.middlware";
+import { httpLogger } from "./middlewares/httpLogger";
 
 const app = express();
+
+app.use(httpLogger);
+
 app.use(express.json());
 
 app.get("/check", (_req: Request, res: Response) => {
