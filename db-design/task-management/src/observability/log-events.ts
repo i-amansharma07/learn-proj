@@ -11,8 +11,8 @@ export type LogLayer =
 export interface LogContext {
   layer: LogLayer;
   operation: string;
-  rowsAffected?: number;
-  rowsFetched?: number;
+  rowsAffected?: number | null;
+  rowsFetched?: number | null;
 
   [key: string]: unknown;
 }

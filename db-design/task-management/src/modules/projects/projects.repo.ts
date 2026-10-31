@@ -262,6 +262,23 @@ export class _ProjectRepo {
     return rows.map((p) => toProject(p));
   }
 
+  async projectExistById(projectId: string): Promise<boolean> {
+    const logger = getLogger();
+    const { rows } = await this.db.query(
+      `
+      SELECT EXISTS(SELECT 1 FROM projects WHERE id=$1) AS exists;
+      `,
+      [projectId],
+    );
+
+    logger.debug(
+      { layer: "repository", operation: "project.projectExistById" },
+      "Project exists by id query executed",
+    );
+
+    return rows[0].exists;
+  }
+
   //test this end point after implementing Tasks
   async getProjectStatsById(projectId: string): Promise<ProjectStats | null> {
     const logger = getLogger();

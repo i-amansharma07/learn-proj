@@ -14,6 +14,6 @@ const ProjectRepo = new _ProjectRepo(pool);
 const ProjectService = new _ProjectService(ProjectRepo, UserRepo);
 
 const TaskRepo = new _TaskRepo(pool);
-const TaskService = new _TaskService(TaskRepo);
+const TaskService = new _TaskService(TaskRepo, UserRepo, ProjectRepo);
 
 export { UserRepo, UserService, ProjectRepo, ProjectService, TaskService };

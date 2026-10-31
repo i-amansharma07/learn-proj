@@ -24,7 +24,7 @@ export class _UserService {
         limit,
         totalUser: total,
       },
-      "Users fetched",
+      "All Users fetched",
     );
 
     return {
