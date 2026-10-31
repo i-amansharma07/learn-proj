@@ -6,7 +6,8 @@ export type LogLayer =
   | "database"
   | "startup"
   | "shutdown"
-  | "ErrorEvent";
+  | "ErrorEvent"
+  | "GlobalErrorMiddleware";
 
 export interface LogContext {
   layer: LogLayer;
