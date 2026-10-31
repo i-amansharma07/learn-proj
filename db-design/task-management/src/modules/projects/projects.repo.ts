@@ -9,6 +9,8 @@ import {
   stats,
 } from "./projects.types";
 import { apiError } from "../../utils/apiErrors";
+import { getLogger } from "../../observability/logger";
+import { serialiseError } from "../../utils/helper";
 
 const projectPublicFields = `id, name, status, owner_id, description, created_at, updated_at`;
 
@@ -23,7 +25,6 @@ const toProject = (project: ProjectRow): Project => {
 };
 
 const toProjectStats = (stats: meta & stats): ProjectStats => {
-  console.log(stats);
   const metaData = {
     name: stats.name,
     ownerId: stats.ownerId,
@@ -50,6 +51,7 @@ export class _ProjectRepo {
   constructor(private readonly db: Pool) {}
 
   async createProjectWithOwner(project: CreateProject): Promise<Project> {
+    const logger = getLogger();
     const client = await this.db.connect();
     const values = [
       project.name,
@@ -84,20 +86,53 @@ export class _ProjectRepo {
 
       await client.query(`COMMIT`);
 
+      logger.debug(
+        {
+          layer: "repository",
+          operation: "project.createProjectWithOwner",
+        },
+        "create project query executed",
+      );
+
       return toProject(row);
     } catch (err) {
+      logger.error(
+        {
+          layer: "repository",
+          operation: "project.createProjectWithOwner",
+          err: serialiseError(err),
+        },
+        "error while creating project",
+      );
       try {
         await client.query(`ROLLBACK`);
+        logger.debug(
+          { layer: "repository", operation: "project.createProjectWithOwner" },
+          "Rolled back",
+        );
       } catch (e) {
-        console.log("Transaction rollback failed while creating project", e);
+        logger.error(
+          {
+            layer: "repository",
+            operation: "project.createProjectWithOwner",
+            err: serialiseError(e),
+          },
+          "Error while rolling back",
+        );
+        throw e;
       }
       throw err;
     } finally {
       client.release();
+      logger.debug(
+        { layer: "repository", operation: "project.createProjectWithOwner" },
+        "Released db connection",
+      );
     }
   }
 
   async getProjectById(projectId: string): Promise<Project> {
+    const logger = getLogger();
     const { rowCount, rows } = await this.db.query<ProjectRow>(
       `
       SELECT ${projectPublicFields}
@@ -111,14 +146,25 @@ export class _ProjectRepo {
       throw apiError.notfound("Project with this id");
     }
 
+    logger.debug(
+      { layer: "repository", operation: "project.getProjectById" },
+      "Project fetched by id query executed",
+    );
+
     return toProject(rows[0]);
   }
 
   async getAllProjects(): Promise<Project[]> {
+    const logger = getLogger();
     const { rows } = await this.db.query<ProjectRow>(`
       SELECT id, name, status, description, owner_id
       FROM projects
       `);
+
+    logger.debug(
+      { layer: "repository", operation: "project.getAllProjects" },
+      "All Projects query executed",
+    );
 
     return rows.map((rec) => toProject(rec));
   }
@@ -127,6 +173,7 @@ export class _ProjectRepo {
     projectId: string,
     data: UpdateProject,
   ): Promise<Project | null> {
+    const logger = getLogger();
     const fields: string[] = [];
     const values: unknown[] = [];
 
@@ -162,12 +209,18 @@ export class _ProjectRepo {
 
     const row = rows[0];
 
+    logger.debug(
+      { layer: "repository", operation: "project.updateProjectById" },
+      "Project updated by id query executed",
+    );
+
     //make this better like there can be multiple errors thrown by db i am only considering
     //projectId not found usecase(returning null for that only)
     return row ? toProject(row) : null;
   }
 
   async deleteProjectById(projectId: string): Promise<number> {
+    const logger = getLogger();
     const { rowCount } = await this.db.query(
       `
       DELETE FROM projects
@@ -176,10 +229,16 @@ export class _ProjectRepo {
       [projectId],
     );
 
+    logger.debug(
+      { layer: "repository", operation: "project.deleteProjectById" },
+      "Project deleted by id query executed",
+    );
+
     return rowCount ?? 0;
   }
 
   async getUsersProjectsByUserId(userId: string): Promise<Project[]> {
+    const logger = getLogger();
     const { rows } = await this.db.query<ProjectRow>(
       `
       SELECT ${projectPublicFields
@@ -195,11 +254,17 @@ export class _ProjectRepo {
       [userId],
     );
 
+    logger.debug(
+      { layer: "repository", operation: "project.getUsersProjectsByUserId" },
+      "user's project query executed",
+    );
+
     return rows.map((p) => toProject(p));
   }
 
   //test this end point after implementing Tasks
   async getProjectStatsById(projectId: string): Promise<ProjectStats | null> {
+    const logger = getLogger();
     const { rows } = await this.db.query(
       `
       SELECT p.name, p.status, p.owner_id AS "ownerId", p.description,
@@ -233,6 +298,11 @@ export class _ProjectRepo {
         GROUP BY p.id;
       `,
       [projectId],
+    );
+
+    logger.debug(
+      { layer: "repository", operation: "project.getProjectStatsById" },
+      "project stats query executed",
     );
 
     return rows[0] ? toProjectStats(rows[0]) : null;

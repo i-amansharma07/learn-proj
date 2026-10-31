@@ -147,11 +147,17 @@ export class _UserRepo {
 
   //not getting used right now
   async userExistsById(userId: string): Promise<boolean> {
+    const logger = getLogger();
     const { rows } = await this.db.query<{ exists: boolean }>(
       `
       SELECT EXISTS(SELECT 1 FROM users WHERE id=$1) AS exists;
       `,
       [userId],
+    );
+
+    logger.debug(
+      { layer: "repository", operation: "user.userExistsById" },
+      "User exist by id query executed",
     );
 
     return rows[0].exists;
@@ -214,11 +220,11 @@ export class _UserRepo {
         "error while creating user",
       );
       try {
-        logger.info(
-          { layer: "repository", operation: "user.createUser" },
-          "Rolling back",
-        );
         await client.query(`ROLLBACK`);
+        logger.debug(
+          { layer: "repository", operation: "user.createUser" },
+          "Rolled back",
+        );
       } catch (e) {
         logger.error(
           {
@@ -226,14 +232,14 @@ export class _UserRepo {
             operation: "user.createUser",
             err: serialiseError(e),
           },
-          "Error while rolling backs",
+          "Error while rolling back",
         );
         throw e;
       }
       throw err;
     } finally {
       client.release();
-      logger.info(
+      logger.debug(
         { layer: "repository", operation: "user.createUser" },
         "Released db connection",
       );
