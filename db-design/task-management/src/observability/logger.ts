@@ -81,6 +81,7 @@ export function createLogger(pinoInstance: pino.Logger) {
   };
 }
 
+//fallback logger
 export const logger = createLogger(pinoLogger);
 
 export const getLogger = () => getRequestContext()?.logger ?? logger;
