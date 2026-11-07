@@ -1,0 +1,46 @@
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: benchmark-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: search_user
+      POSTGRES_PASSWORD: search_password
+      POSTGRES_DB: search_benchmark
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U search_user -d search_benchmark
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.6
+    container_name: benchmark-elasticsearch
+    restart: unless-stopped
+
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+
+    ports:
+      - "9200:9200"
+
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+
+volumes:
+  postgres_data:
+  elasticsearch_data:
+
