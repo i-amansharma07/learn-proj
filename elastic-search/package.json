@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "seed": "tsx src/scripts/seed.ts",
+    "benchmark:exact": "tsx src/benchmarks/runner.ts",
+    "benchmark:category": "tsx src/benchmarks/category-runner.ts",
+    "benchmark:fulltext": "tsx src/benchmarks/full-text-runner.ts"
   },
   "keywords": [],
   "author": "",
