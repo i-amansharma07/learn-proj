@@ -30,6 +30,7 @@ export function httpLogger(req: Request, res: Response, next: NextFunction) {
   let responseFinished = false;
   let metricRecorded = false;
   const path = req.path;
+
   //exluding monitoring endpoint from http traffic metric
   const shouldSkipMetric = path === "/metrics" || path.startsWith("/health");
 

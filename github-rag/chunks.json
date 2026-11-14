@@ -1,0 +1,1254 @@
+[
+  [
+    {
+      "id": "AGENTS.md:1-1",
+      "content": "<!-- BEGIN:nextjs-agent-rules -->",
+      "metadata": {
+        "path": "AGENTS.md",
+        "language": "markdown",
+        "startLine": 1,
+        "endLine": 1
+      }
+    },
+    {
+      "id": "AGENTS.md:2-6",
+      "content": "# This is NOT the Next.js you know\n\nThis version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.\n<!-- END:nextjs-agent-rules -->",
+      "metadata": {
+        "path": "AGENTS.md",
+        "language": "markdown",
+        "startLine": 2,
+        "endLine": 6
+      }
+    }
+  ],
+  [
+    {
+      "id": "918b1c90559355ef",
+      "content": "@AGENTS.md",
+      "metadata": {
+        "path": "CLAUDE.md",
+        "language": "markdown",
+        "startLine": 1,
+        "endLine": 2
+      }
+    }
+  ],
+  [
+    {
+      "id": "README.md:1-4",
+      "content": "# MovieDB - TMDB Movie Discovery App\n\nA modern, responsive movie discovery application built with Next.js that leverages The Movie Database (TMDB) API to provide users with comprehensive movie information, search capabilities, and personalized watchlists.",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 1,
+        "endLine": 4
+      }
+    },
+    {
+      "id": "README.md:5-13",
+      "content": "## Features\n\n- **Movie Discovery**: Browse trending, popular, and top-rated movies\n- **Advanced Search**: Find movies by title, genre, or keywords\n- **Detailed Movie Information**: View comprehensive movie details including cast, crew, ratings, and trailers\n- **Watchlist Management**: Create and manage your personal movie watchlist\n- **Responsive Design**: Optimized for desktop, tablet, and mobile devices\n- **Fast Performance**: Built with Next.js for optimal loading speeds and SEO",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 5,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "README.md:14-22",
+      "content": "## Tech Stack\n\n- **Framework**: Next.js 16 with App Router\n- **Language**: TypeScript\n- **Styling**: Tailwind CSS\n- **Icons**: Lucide React\n- **API**: The Movie Database (TMDB) API\n- **State Management**: React Server Components and Actions",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 14,
+        "endLine": 22
+      }
+    },
+    {
+      "id": "README.md:23-24",
+      "content": "## Installation",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 23,
+        "endLine": 24
+      }
+    },
+    {
+      "id": "README.md:25-29",
+      "content": "### Prerequisites\n\n- Node.js 18+ and npm/yarn/pnpm\n- TMDB API Key (get one at [TMDB](https://www.themoviedb.org/settings/api))",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 25,
+        "endLine": 29
+      }
+    },
+    {
+      "id": "README.md:30-70",
+      "content": "### Setup\n\n1. **Clone the repository**\n   ```bash\n   git clone <repository-url>\n   cd movie\n   ```\n\n2. **Install dependencies**\n   ```bash\n   npm install\n   # or\n   yarn install\n   # or\n   pnpm install\n   ```\n\n3. **Environment Setup**\n   - Copy the `.env` file and update it with your TMDB API credentials:\n   ```bash\n   cp .env .env.local\n   ```\n   - Get your API key from [TMDB API Settings](https://www.themoviedb.org/settings/api)\n   - Update the following variables in `.env.local`:\n     ```\n     API_READ_ACCESS_TOKEN=your_tmdb_access_token_here\n     API_KEY=your_tmdb_api_key_here\n     ```\n\n4. **Run the development server**\n   ```bash\n   npm run dev\n   # or\n   yarn dev\n   # or\n   pnpm dev\n   ```\n\n5. **Open your browser**\n   - Navigate to [http://localhost:3000](http://localhost:3000)",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 30,
+        "endLine": 70
+      }
+    },
+    {
+      "id": "README.md:71-77",
+      "content": "## Usage\n\n- **Home Page**: Discover trending movies and featured content\n- **Search**: Use the search bar to find specific movies\n- **Movie Details**: Click on any movie card to view detailed information\n- **Watchlist**: Add movies to your watchlist for later viewing",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 71,
+        "endLine": 77
+      }
+    },
+    {
+      "id": "README.md:78-90",
+      "content": "## Project Structure\n\n```\nmovie/\n├── actions/          # Server actions for API calls\n├── app/             # Next.js app router pages\n├── components/      # Reusable React components\n├── lib/             # Utility functions\n├── types/           # TypeScript type definitions\n├── public/          # Static assets\n└── data/            # Dummy data and constants\n```",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 78,
+        "endLine": 90
+      }
+    },
+    {
+      "id": "README.md:91-100",
+      "content": "## Contributing\n\nWe welcome contributions! Please follow these steps:\n\n1. Fork the repository\n2. Create a feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add some amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 91,
+        "endLine": 100
+      }
+    },
+    {
+      "id": "README.md:101-107",
+      "content": "### Development Guidelines\n\n- Follow TypeScript best practices\n- Use meaningful commit messages\n- Ensure all tests pass before submitting PR\n- Update documentation as needed",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 101,
+        "endLine": 107
+      }
+    },
+    {
+      "id": "README.md:108-111",
+      "content": "## API Reference\n\nThis project uses The Movie Database (TMDB) API. For more information about available endpoints, visit the [TMDB API Documentation](https://developers.themoviedb.org/3/getting-started/introduction).",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 108,
+        "endLine": 111
+      }
+    },
+    {
+      "id": "README.md:112-115",
+      "content": "## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 112,
+        "endLine": 115
+      }
+    },
+    {
+      "id": "README.md:116-121",
+      "content": "## Acknowledgments\n\n- [The Movie Database (TMDB)](https://www.themoviedb.org/) for providing the movie data API\n- [Next.js](https://nextjs.org/) for the amazing React framework\n- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 116,
+        "endLine": 121
+      }
+    },
+    {
+      "id": "README.md:122-125",
+      "content": "## Support\n\nIf you find this project helpful, please give it a ⭐️ on GitHub!",
+      "metadata": {
+        "path": "README.md",
+        "language": "markdown",
+        "startLine": 122,
+        "endLine": 125
+      }
+    }
+  ],
+  [
+    {
+      "id": "851e980c040e89b5",
+      "content": "const BASE_URL = \"https://api.themoviedb.org/3\";",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "id": "bc07326c0a05bfa8",
+      "content": "const headers = {\n  Authorization: `Bearer ${process.env.API_READ_ACCESS_TOKEN}`,\n  Accept: \"application/json\",\n};",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 4,
+        "endLine": 7
+      }
+    },
+    {
+      "id": "fcf3bac210b74463",
+      "content": "const filters = [\"now_playing\", \"popular\", \"top_rated\"];",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "id": "1cfd64dfc19555f7",
+      "content": "async function fetchTMDB<T>(url: string, retries = 3): Promise<T> {\n  for (let attempt = 1; attempt <= retries; attempt++) {\n    try {\n      const res = await fetch(url, { headers, cache: \"no-store\" });\n\n      if (!res.ok) {\n        throw new Error(`TMDB error: ${res.status} ${res.statusText}`);\n      }\n\n      return res.json() as Promise<T>;\n    } catch (err) {\n      if (attempt === retries) throw err;\n      // Exponential backoff: 1s, 2s, 4s\n      await new Promise((resolve) => setTimeout(resolve, 2 ** attempt * 500));\n    }\n  }\n  throw new Error(\"Unreachable\");\n}",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 11,
+        "endLine": 28
+      }
+    },
+    {
+      "id": "2c2e364511dcbf64",
+      "content": "const res = await fetch(url, { headers, cache: \"no-store\" });",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 14,
+        "endLine": 14
+      }
+    },
+    {
+      "id": "ed071af5b3879160",
+      "content": "(resolve) => setTimeout(resolve, 2 ** attempt * 500)",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 24,
+        "endLine": 24
+      }
+    },
+    {
+      "id": "2abfa7c86ee1b233",
+      "content": "async function getAllMovies() : Promise<Movie[]> {\n  const kind = filters[Math.floor(Math.random() * 3)];\n  const url = `${BASE_URL}/movie/${kind}?language=en-US&page=1`;\n\n  const data = await fetchTMDB<{ results: Movie[] }>(url);\n  return data.results;\n}",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 30,
+        "endLine": 36
+      }
+    },
+    {
+      "id": "4606151192d2e951",
+      "content": "const kind = filters[Math.floor(Math.random() * 3)];",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 31,
+        "endLine": 31
+      }
+    },
+    {
+      "id": "1e1119027622be29",
+      "content": "const url = `${BASE_URL}/movie/${kind}?language=en-US&page=1`;",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 32,
+        "endLine": 32
+      }
+    },
+    {
+      "id": "f0bcd344e66010a2",
+      "content": "const data = await fetchTMDB<{ results: Movie[] }>(url);",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 34,
+        "endLine": 34
+      }
+    },
+    {
+      "id": "57e31f9365542be9",
+      "content": "async function getMovieById(id: string) : Promise<Movie> {\n  const url = `${BASE_URL}/movie/${id}?language=en-US&page=1`;\n\n  return fetchTMDB(url);\n}",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 38,
+        "endLine": 42
+      }
+    },
+    {
+      "id": "f527e33e8607c9f0",
+      "content": "const url = `${BASE_URL}/movie/${id}?language=en-US&page=1`;",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 39,
+        "endLine": 39
+      }
+    },
+    {
+      "id": "e31852ecdfda71cc",
+      "content": "async function searchMovies(query: string) : Promise<Movie[]> {\n  const url = `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=1`;\n  \n  const data = await fetchTMDB<{ results: Movie[] }>(url);\n  return data.results;\n}",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 44,
+        "endLine": 49
+      }
+    },
+    {
+      "id": "54df92fc7abd9f7c",
+      "content": "const url = `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=1`;",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 45,
+        "endLine": 45
+      }
+    },
+    {
+      "id": "f0bcd344e66010a2",
+      "content": "const data = await fetchTMDB<{ results: Movie[] }>(url);",
+      "metadata": {
+        "path": "actions/movie.ts",
+        "language": "typescript",
+        "startLine": 47,
+        "endLine": 47
+      }
+    }
+  ],
+  [
+    {
+      "id": "5cc05711935d3ab4",
+      "content": "const dmSerif = DM_Serif_Display({\n  weight: \"400\",\n  subsets: [\"latin\"],\n  variable: \"--font-display\",\n});",
+      "metadata": {
+        "path": "app/layout.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 12
+      }
+    },
+    {
+      "id": "aacfb2966b2513dd",
+      "content": "const sora = Sora({\n  subsets: [\"latin\"],\n  variable: \"--font-body\",\n});",
+      "metadata": {
+        "path": "app/layout.tsx",
+        "language": "typescript",
+        "startLine": 14,
+        "endLine": 17
+      }
+    },
+    {
+      "id": "a64a6900cd747755",
+      "content": "export const metadata: Metadata = {\n  title: \"Floor15 — Watch Movies\",\n  description: \"Your cinematic universe, no login required.\",\n};",
+      "metadata": {
+        "path": "app/layout.tsx",
+        "language": "typescript",
+        "startLine": 19,
+        "endLine": 22
+      }
+    },
+    {
+      "id": "1c26afd4f28dcb42",
+      "content": "export default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return (\n    <html lang=\"en\" className={`${dmSerif.variable} ${sora.variable} dark`}>\n      <body\n        suppressHydrationWarning\n        className=\"bg-[#0A0A0B] text-[#F0EDE8] font-body antialiased\"\n      >\n        <Navbar />\n        <main>{children}</main>\n        <Footer />\n      </body>\n    </html>\n  );\n}",
+      "metadata": {
+        "path": "app/layout.tsx",
+        "language": "typescript",
+        "startLine": 24,
+        "endLine": 41
+      }
+    }
+  ],
+  [
+    {
+      "id": "79d7497d74a40950",
+      "content": "export default function Loading() {\n  return (\n    <div className=\"flex items-center justify-center h-screen backdrop-blur bg-black/50\">\n      <div className=\"w-16 h-16 border-4 border-t-transparent border-white rounded-full animate-spin\" />\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "app/loading.tsx",
+        "language": "typescript",
+        "startLine": 1,
+        "endLine": 7
+      }
+    }
+  ],
+  [
+    {
+      "id": "bcd5d9cda3338abc",
+      "content": "export default async function HomePage() {\n  const movies: Movie[] = await getAllMovies();\n  if (!movies) return;\n  const featured = movies && movies[0];\n\n  return (\n    <>\n      <HeroSection movie={featured} />\n      <section className=\"max-w-screen-xl mx-auto px-6 py-12\">\n        <SearchBar />\n        <MovieGrid movies={movies} classname=\"mt-10\" />\n      </section>\n    </>\n  );\n}",
+      "metadata": {
+        "path": "app/page.tsx",
+        "language": "typescript",
+        "startLine": 7,
+        "endLine": 21
+      }
+    },
+    {
+      "id": "fe00349045a920fd",
+      "content": "const movies: Movie[] = await getAllMovies();",
+      "metadata": {
+        "path": "app/page.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "id": "1617f6f019cbdd1c",
+      "content": "const featured = movies && movies[0];",
+      "metadata": {
+        "path": "app/page.tsx",
+        "language": "typescript",
+        "startLine": 10,
+        "endLine": 10
+      }
+    }
+  ],
+  [
+    {
+      "id": "c5b712fadecfac05",
+      "content": "type SearchPageProps = {\n  searchParams: Promise<{ q?: string }>;\n};",
+      "metadata": {
+        "path": "app/search/page.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 10
+      }
+    },
+    {
+      "id": "d04491c692bc1d25",
+      "content": "export default async function SearchPage({ searchParams }: SearchPageProps) {\n  const { q } = await searchParams;\n  if (!q) {\n    return notFound();\n  }\n\n  const movies: Movie[] = await searchMovies(q);\n\n  return (\n    <div className=\"flex justify-center w-full min-h-screen overflow-hidden\">\n      <section className=\"max-w-screen-2xl mt-5 gap-5  sm:mt-8 flex  sm:gap-8  flex-col  px-6 py-12\">\n        <SearchBar initialValue={q} />\n        <h2 className=\"font-display text-3xl\">\n          Results for <span className=\"text-[#E8B84B]\">\"{q}\"</span>\n        </h2>\n        <MovieGrid title=\"\" movies={movies} classname=\"min-w-full\" />\n      </section>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "app/search/page.tsx",
+        "language": "typescript",
+        "startLine": 12,
+        "endLine": 31
+      }
+    },
+    {
+      "id": "82bddedadafaf42a",
+      "content": "const { q } = await searchParams;",
+      "metadata": {
+        "path": "app/search/page.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "abb2267f08981979",
+      "content": "const movies: Movie[] = await searchMovies(q);",
+      "metadata": {
+        "path": "app/search/page.tsx",
+        "language": "typescript",
+        "startLine": 18,
+        "endLine": 18
+      }
+    }
+  ],
+  [
+    {
+      "id": "981b04ef62563249",
+      "content": "export default function TodoPage() {\n    return <ul className=\"mt-28 mx-auto list-disc pl-5\" style={{ maxWidth: \"48rem\" }}>\n        <li>Show more movies on watch page</li>\n        <li>Search Bar</li>\n    </ul>\n}",
+      "metadata": {
+        "path": "app/todo/page.tsx",
+        "language": "typescript",
+        "startLine": 1,
+        "endLine": 6
+      }
+    }
+  ],
+  [
+    {
+      "id": "0632b9d175b9dabb",
+      "content": "interface Props {\n  params: Promise<{ id: string }>;\n}",
+      "metadata": {
+        "path": "app/watch/[id]/page.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 10
+      }
+    },
+    {
+      "id": "441eb4c06c5004f1",
+      "content": "export default async function WatchPage({ params }: Props) {\n  const { id } = await params;\n  const movie: Movie | any = await getMovieById(id);\n  const movies: Movie[] = await getAllMovies();\n  if (!movies) return;\n  if (!movie) notFound();\n\n  return (\n    <div className=\"min-h-screen bg-[#0A0A0B]\">\n      <div className=\"relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pt-6 pb-20\">\n        {/* ── Main layout: player + sidebar ── */}\n        <div className=\"grid grid-cols-1 xl:grid-cols-3 gap-8\">\n          {/* ══ LEFT / MAIN COLUMN ══════════════════════════════════════ */}\n          <div className=\"xl:col-span-2 flex flex-col gap-6 mt-28\">\n            {/* Video Player */}\n            <div\n              className=\"w-full overflow-hidden rounded-2xl\n                         ring-1 ring-white/8\n                         shadow-[0_32px_80px_rgba(0,0,0,0.8)]\"\n            >\n              <div className=\"relative w-full\" style={{ paddingTop: \"56.25%\" }}>\n                <iframe\n                  src={`https://www.vidking.net/embed/movie/${id}`}\n                  className=\"absolute inset-0 w-full h-full\"\n                  allowFullScreen\n                  allow=\"autoplay; encrypted-media; picture-in-picture\"\n                  style={{ border: \"none\" }}\n                  // sandbox=\"allow-scripts allow-same-origin allow-forms allow-presentation\"\n                />\n              </div>\n            </div>\n\n            {/* ── Movie Info Card ── */}\n            <MovieInfoCard movie={movie} />\n          </div>\n\n          {/* ══ RIGHT / SIDEBAR ═════════════════════════════════════════ */}\n          <aside className=\"flex flex-col gap-6 mt-10\">\n            {/* Up Next heading */}\n            <div className=\"flex items-center justify-between\">\n              <h3 className=\"font-display text-xl text-[#F0EDE8]\">Up Next</h3>\n              <Link\n                href=\"/\"\n                className=\"cursor-pointer text-sm font-body text-[#E8B84B] hover:text-[#F5CC6A] transition-colors\"\n              >\n                Browse all →\n              </Link>\n            </div>\n            <MovieRealatedGrid movies={movies?.slice(4, 10)} title=\"\" />\n          </aside>\n        </div>\n      </div>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "app/watch/[id]/page.tsx",
+        "language": "typescript",
+        "startLine": 12,
+        "endLine": 66
+      }
+    },
+    {
+      "id": "61e8bf3513e392eb",
+      "content": "const { id } = await params;",
+      "metadata": {
+        "path": "app/watch/[id]/page.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "8eee411fcf8ff793",
+      "content": "const movie: Movie | any = await getMovieById(id);",
+      "metadata": {
+        "path": "app/watch/[id]/page.tsx",
+        "language": "typescript",
+        "startLine": 14,
+        "endLine": 14
+      }
+    },
+    {
+      "id": "fe00349045a920fd",
+      "content": "const movies: Movie[] = await getAllMovies();",
+      "metadata": {
+        "path": "app/watch/[id]/page.tsx",
+        "language": "typescript",
+        "startLine": 15,
+        "endLine": 15
+      }
+    }
+  ],
+  [
+    {
+      "id": "401db7040256450a",
+      "content": "interface Props {\n  movie: Movie;\n}",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 10
+      }
+    },
+    {
+      "id": "7fa35de4a6edb042",
+      "content": "const GENRE_MAP: Record<number, string> = {\n  28: 'Action', 12: 'Adventure', 16: 'Animation', 35: 'Comedy',\n  80: 'Crime', 99: 'Documentary', 18: 'Drama', 10751: 'Family',\n  14: 'Fantasy', 36: 'History', 27: 'Horror', 10402: 'Music',\n  9648: 'Mystery', 10749: 'Romance', 878: 'Sci-Fi', 10770: 'TV Movie',\n  53: 'Thriller', 10752: 'War', 37: 'Western',\n};",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 12,
+        "endLine": 18
+      }
+    },
+    {
+      "id": "e0d8e67a04533244",
+      "content": "function formatDate(dateStr: string) {\n  return new Date(dateStr).toLocaleDateString('en-US', {\n    year: 'numeric',\n    month: 'long',\n    day: 'numeric',\n  });\n}",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "id": "b29f7a7f05f8594e",
+      "content": "function VoteBar({ value }: { value: number }) {\n  const pct = (value / 10) * 100;\n  return (\n    <div className=\"flex items-center gap-3\">\n      <div className=\"h-1 w-28 rounded-full bg-white/10 overflow-hidden\">\n        <div\n          className=\"h-full rounded-full bg-gradient-to-r from-[#E8B84B] to-[#f4d06f] transition-all duration-700\"\n          style={{ width: `${pct}%` }}\n        />\n      </div>\n      <span className=\"text-xs text-[#9B9591]\">{value.toFixed(1)} / 10</span>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 28,
+        "endLine": 41
+      }
+    },
+    {
+      "id": "421a7611bcad46eb",
+      "content": "const pct = (value / 10) * 100;",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "id": "6b09186d53c5e100",
+      "content": "export default function HeroSection({ movie }: Props) {\n\n\n  const genres = (movie.genre_ids ?? [])\n    .map((id) => GENRE_MAP[id])\n    .filter(Boolean)\n    .slice(0, 3);\n\n  const description = movie.overview ?? movie.tagline;\n\n  return (\n    <section className=\"relative w-full h-[95vh] min-h-[640px] overflow-hidden\">\n\n      {/* ── Backdrop ── */}\n      <TMDBImage\n        path={movie.backdrop_path}\n        alt={movie.title}\n        fill\n        priority\n        className=\"object-cover object-top scale-[1.03]\"\n      />\n\n      {/* ── Gradient layers ── */}\n      {/* Left fade for text readability */}\n      <div className=\"absolute inset-0 bg-gradient-to-r from-[#0A0A0B] via-[#0A0A0B]/75 to-[#0A0A0B]/10\" />\n      {/* Bottom fade into page */}\n      <div className=\"absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-[#0A0A0B]/30\" />\n      {/* Subtle vignette */}\n      <div className=\"absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#0A0A0B_100%)] opacity-60\" />\n\n      {/* ── Letterbox bars (cinematic feel) ── */}\n      <div className=\"absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent\" />\n      <div className=\"absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent\" />\n\n      {/* ── Content ── */}\n      <div className=\"absolute inset-0 flex items-end md:items-center pb-16 md:pb-0\">\n        <div className=\"max-w-screen-xl mx-auto px-6 w-full\">\n          <div className=\"flex items-end md:items-center justify-between gap-12\">\n\n            {/* Left: Text content */}\n            <div className=\"max-w-2xl flex flex-col gap-5\" style={{ animation: 'heroFadeUp 0.8s ease both' }}>\n\n              {/* Genre pills */}\n              {genres.length > 0 && (\n                <div className=\"flex gap-2 flex-wrap\">\n                  {genres.map((g) => (\n                    <span\n                      key={g}\n                      className=\"px-3 py-0.5 rounded-full text-[11px] font-semibold tracking-widest uppercase\n                                 border border-white/15 text-[#9B9591] bg-white/5 backdrop-blur-sm\"\n                    >\n                      {g}\n                    </span>\n                  ))}\n                </div>\n              )}\n\n              {/* Title */}\n              <h1\n                className=\"font-display text-5xl md:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-[#F0EDE8]\"\n                style={{ textShadow: '0 4px 40px rgba(0,0,0,0.6)' }}\n              >\n                {movie.title}\n              </h1>\n\n              {/* Overview */}\n              {description && (\n                <p className=\"text-[#9B9591] text-base font-body max-w-lg leading-relaxed line-clamp-3\">\n                  {description}\n                </p>\n              )}\n\n              {/* Meta row */}\n              <div className=\"flex flex-col gap-2.5\">\n                {/* Star rating + bar */}\n                <div className=\"flex items-center gap-3\">\n                  <StarIcon className=\"w-4 h-4 fill-[#E8B84B] text-[#E8B84B]\" />\n                  <span className=\"text-[#E8B84B] font-semibold text-sm\">\n                    {movie.vote_average.toFixed(1)}\n                  </span>\n                  <VoteBar value={movie.vote_average} />\n                </div>\n\n                {/* Date + vote count */}\n                <div className=\"flex items-center gap-5 text-xs text-[#6B6663]\">\n                  <span className=\"flex items-center gap-1.5\">\n                    <CalendarIcon className=\"w-3.5 h-3.5\" />\n                    {formatDate(movie.release_date)}\n                  </span>\n                  {movie.vote_count && (\n                    <span className=\"flex items-center gap-1.5\">\n                      <UsersIcon className=\"w-3.5 h-3.5\" />\n                      {movie.vote_count.toLocaleString()} ratings\n                    </span>\n                  )}\n                </div>\n              </div>\n\n              {/* CTAs */}\n              <div className=\"flex gap-3 mt-1\">\n                <Link href={`/watch/${movie.id}`}>\n                  <Button variant=\"primary\" icon={<PlayIcon className=\"w-4 h-4\" />}>\n                    Watch Now\n                  </Button>\n                </Link>\n              </div>\n            </div>\n\n            {/* Right: Poster card — hidden on small screens */}\n            <div\n              className=\"hidden lg:block flex-shrink-0\"\n              style={{ animation: 'heroFadeUp 0.9s 0.15s ease both' }}\n            >\n              <div className=\"relative w-52 xl:w-60 aspect-[2/3] rounded-xl overflow-hidden\n                              shadow-[0_24px_80px_rgba(0,0,0,0.7)] ring-1 ring-white/10\">\n                <TMDBImage\n                  path={movie.poster_path}\n                  alt={`${movie.title} poster`}\n                  fill\n                  className=\"object-cover\"\n                />\n                {/* Subtle gloss overlay */}\n                <div className=\"absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none\" />\n              </div>\n            </div>\n\n          </div>\n        </div>\n      </div>\n\n      {/* ── Keyframes ── injected via a style tag ── */}\n      <style>{`\n        @keyframes heroFadeUp {\n          from { opacity: 0; transform: translateY(24px); }\n          to   { opacity: 1; transform: translateY(0); }\n        }\n      `}</style>\n    </section>\n  );\n}",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 43,
+        "endLine": 182
+      }
+    },
+    {
+      "id": "c4f1203499554939",
+      "content": "const genres = (movie.genre_ids ?? [])\n    .map((id) => GENRE_MAP[id])\n    .filter(Boolean)\n    .slice(0, 3);",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 46,
+        "endLine": 49
+      }
+    },
+    {
+      "id": "1b4a641ec1bd1911",
+      "content": "(id) => GENRE_MAP[id]",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "id": "2fa508fb643507e2",
+      "content": "const description = movie.overview ?? movie.tagline;",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "id": "85391571eb56d166",
+      "content": "(g) => (\n                    <span\n                      key={g}\n                      className=\"px-3 py-0.5 rounded-full text-[11px] font-semibold tracking-widest uppercase\n                                 border border-white/15 text-[#9B9591] bg-white/5 backdrop-blur-sm\"\n                    >\n                      {g}\n                    </span>\n                  )",
+      "metadata": {
+        "path": "components/home/HeroSection.tsx",
+        "language": "typescript",
+        "startLine": 88,
+        "endLine": 96
+      }
+    }
+  ],
+  [
+    {
+      "id": "401db7040256450a",
+      "content": "interface Props {\n  movie: Movie;\n}",
+      "metadata": {
+        "path": "components/home/MovieCard.tsx",
+        "language": "typescript",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "id": "1f4f0ad1cde05575",
+      "content": "export default function MovieCard({ movie }: Props) {\n  return (\n    <Link\n      href={`/watch/${movie.id}`}\n      className=\"group relative block rounded-xl overflow-hidden bg-[#111114] \n                 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-glow)]\n                 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]\"\n    >\n      {/* Poster */}\n      <div className=\"relative aspect-[2/3] overflow-hidden\">\n        <TMDBImage\n          path={movie.poster_path}\n          alt={movie.title}\n          fill\n          className=\"object-cover transition-transform duration-500 group-hover:scale-110\"\n          sizes=\"(max-width: 768px) 50vw, 25vw\"\n        />\n\n        {/* Play overlay */}\n        <div\n          className=\"absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100\n                        transition-opacity duration-300 flex items-center justify-center\"\n        >\n          <PlayCircleIcon className=\"w-16 h-16 text-[#E8B84B] drop-shadow-2xl\" />\n        </div>\n      </div>\n\n      {/* Info */}\n      <div className=\"p-3 flex flex-col gap-1\">\n        <h3 className=\"font-display text-lg leading-tight text-[#F0EDE8] line-clamp-1\">\n          {movie.title}\n        </h3>\n        <div className=\"flex items-center justify-between text-xs text-[#9B9591]\">\n          <span>{movie.year}</span>\n          <span className=\"text-[#E8B84B]\">★ {movie.vote_average.toFixed(1)}</span>\n        </div>\n      </div>\n    </Link>\n  );\n}",
+      "metadata": {
+        "path": "components/home/MovieCard.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 52
+      }
+    }
+  ],
+  [
+    {
+      "id": "6cfb34c484e4b7a1",
+      "content": "interface Props {\n  classname?: string;\n  movies: Movie[];\n  title?: string;\n}",
+      "metadata": {
+        "path": "components/home/MovieGrid.tsx",
+        "language": "typescript",
+        "startLine": 5,
+        "endLine": 9
+      }
+    },
+    {
+      "id": "07597f0d74610470",
+      "content": "export default function MovieGrid({\n  classname,\n  movies,\n  title = \"All Movies\",\n}: Props) {\n  return (\n    <div className={`${classname}`}>\n      <h2 className=\"font-display text-4xl mb-6 text-[#F0EDE8]\">{title}</h2>\n      <div className=\"grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-between\">\n        {movies.map((movie) => (\n          <MovieCard key={movie.id} movie={movie} />\n        ))}\n      </div>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "components/home/MovieGrid.tsx",
+        "language": "typescript",
+        "startLine": 11,
+        "endLine": 26
+      }
+    },
+    {
+      "id": "8eb4e363153c000d",
+      "content": "(movie) => (\n          <MovieCard key={movie.id} movie={movie} />\n        )",
+      "metadata": {
+        "path": "components/home/MovieGrid.tsx",
+        "language": "typescript",
+        "startLine": 20,
+        "endLine": 22
+      }
+    },
+    {
+      "id": "82eb57d3d3023def",
+      "content": "export function MovieRealatedGrid({\n  classname,\n  movies,\n  title = \"All Movies\",\n}: Props) {\n  return (\n    <div className={`${classname}`}>\n      <h2 className=\"font-display text-4xl mb-6 text-[#F0EDE8]\">{title}</h2>\n      <div className=\"grid grid-cols-2 gap-4\">\n        {movies.map((movie) => (\n          <MovieCard key={movie.id} movie={movie} />\n        ))}\n      </div>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "components/home/MovieGrid.tsx",
+        "language": "typescript",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "id": "8eb4e363153c000d",
+      "content": "(movie) => (\n          <MovieCard key={movie.id} movie={movie} />\n        )",
+      "metadata": {
+        "path": "components/home/MovieGrid.tsx",
+        "language": "typescript",
+        "startLine": 38,
+        "endLine": 40
+      }
+    }
+  ],
+  [
+    {
+      "id": "5e9c5b659794ce37",
+      "content": "interface FooterLink {\n  label: string;\n  href: string;\n}",
+      "metadata": {
+        "path": "components/layout/Footer.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 11
+      }
+    },
+    {
+      "id": "b7a8fe0191459fd7",
+      "content": "interface FooterColumn {\n  heading: string;\n  links: FooterLink[];\n}",
+      "metadata": {
+        "path": "components/layout/Footer.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 16
+      }
+    },
+    {
+      "id": "9be1f3a80690a919",
+      "content": "const footerColumns: FooterColumn[] = [\n  {\n    heading: \"Browse\",\n    links: [\n      { label: \"All Movies\", href: \"/\" },\n      { label: \"Action\", href: \"/search?q=action\" },\n      { label: \"Drama\", href: \"/search?q=drama\" },\n      { label: \"Comedy\", href: \"/search?q=comedy\" },\n      { label: \"Thriller\", href: \"/search?q=thriller\" },\n      { label: \"Sci-Fi\", href: \"/search?q=sci-fi\" },\n    ],\n  },\n  {\n    heading: \"Company\",\n    links: [\n      { label: \"About Us\", href: \"/about\" },\n      { label: \"Careers\", href: \"/careers\" },\n      { label: \"Press Kit\", href: \"/press\" },\n      { label: \"Blog\", href: \"/blog\" },\n    ],\n  },\n  {\n    heading: \"Legal\",\n    links: [\n      { label: \"Privacy Policy\", href: \"/privacy\" },\n      { label: \"Terms of Service\", href: \"/terms\" },\n      { label: \"Cookie Policy\", href: \"/cookies\" },\n      { label: \"DMCA\", href: \"/dmca\" },\n    ],\n  },\n];",
+      "metadata": {
+        "path": "components/layout/Footer.tsx",
+        "language": "typescript",
+        "startLine": 20,
+        "endLine": 50
+      }
+    },
+    {
+      "id": "0230e0b2e67568bc",
+      "content": "export default function Footer() {\n  const currentYear = new Date().getFullYear();\n\n  return (\n    <footer className=\"relative mt-24 border-t border-white/5 bg-[#0A0A0B]\">\n      {/* Subtle top glow line */}\n      <div\n        aria-hidden=\"true\"\n        className=\"absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px\n                   bg-gradient-to-r from-transparent via-[#E8B84B]/30 to-transparent\"\n      />\n\n      <div className=\"max-w-screen-xl mx-auto px-6\">\n        {/* ── Upper section ── */}\n        <div className=\"py-16 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5\">\n          {/* Brand column */}\n          <div className=\"lg:col-span-2 flex flex-col gap-5\">\n            {/* Logo */}\n            <Link href=\"/\" className=\"flex items-center gap-2 w-fit group\">\n              <div className=\"relative\">\n                <FilmIcon\n                  className=\"w-7 h-7 text-[#E8B84B] transition-transform\n                             duration-300 group-hover:rotate-12\"\n                />\n                {/* Glow behind icon */}\n                <span\n                  aria-hidden=\"true\"\n                  className=\"absolute inset-0 blur-md bg-[#E8B84B]/30\n                             opacity-0 group-hover:opacity-100 transition-opacity duration-300\"\n                />\n              </div>\n              <span className=\"font-display text-2xl tracking-tight text-[#F0EDE8]\">\n                Floor15\n              </span>\n            </Link>\n\n            {/* Tagline */}\n            <p className=\"text-[#6B6762] text-sm leading-relaxed max-w-xs font-body\">\n              Your cinematic universe — thousands of films, zero logins. Stream\n              what you love, instantly.\n            </p>\n\n            {/* Social icons */}\n            {/* <div className=\"flex items-center gap-3 mt-2\">\n              {socialLinks.map(({ label, href, Icon }) => (\n                <a\n                  key={label}\n                  href={href}\n                  target=\"_blank\"\n                  rel=\"noopener noreferrer\"\n                  aria-label={label}\n                  className=\"w-9 h-9 rounded-full flex items-center justify-center\n                             border border-white/8 text-[#6B6762]\n                             hover:border-[#E8B84B]/40 hover:text-[#E8B84B]\n                             hover:bg-[#E8B84B]/8 transition-all duration-200\"\n                >\n                  <Icon className=\"w-4 h-4\" />\n                </a>\n              ))}\n            </div> */}\n          </div>\n\n          {/* Link columns */}\n          {footerColumns.map((col) => (\n            <div key={col.heading} className=\"flex flex-col gap-4\">\n              <h4 className=\"font-body text-xs font-semibold uppercase tracking-widest text-[#E8B84B]\">\n                {col.heading}\n              </h4>\n              <ul className=\"flex flex-col gap-3\">\n                {col.links.map((link) => (\n                  <li key={link.label}>\n                    <div\n                      // href={link.href}\n                      className=\"font-body text-sm text-[#6B6762] hover:text-[#F0EDE8]\n                                 transition-colors duration-150 hover:translate-x-0.5\n                                 inline-block\"\n                    >\n                      {link.label}\n                    </div>\n                  </li>\n                ))}\n              </ul>\n            </div>\n          ))}\n        </div>\n\n        {/* ── Divider ── */}\n        <div className=\"h-px w-full bg-gradient-to-r from-transparent via-white/6 to-transparent\" />\n\n        {/* ── Bottom bar ── */}\n        <div className=\"py-6 flex flex-col sm:flex-row items-center justify-between gap-3\">\n          <p className=\"font-body text-xs text-[#3A3835]\">\n            © {currentYear} Floor15. All rights reserved.\n          </p>\n\n          <p className=\"font-body text-xs text-[#3A3835] flex items-center gap-1.5\">\n            <span>Crafted with</span>\n            {/* Heart */}\n            <svg\n              aria-hidden=\"true\"\n              viewBox=\"0 0 16 16\"\n              className=\"w-3 h-3 fill-[#E8B84B]/60\"\n            >\n              <path d=\"M8 13.7C7.6 13.4 1 9.2 1 5a4 4 0 0 1 7-2.6A4 4 0 0 1 15 5c0 4.2-6.6 8.4-7 8.7z\" />\n            </svg>\n            <span>using Next.js & Tailwind CSS</span>\n          </p>\n        </div>\n      </div>\n    </footer>\n  );\n}",
+      "metadata": {
+        "path": "components/layout/Footer.tsx",
+        "language": "typescript",
+        "startLine": 60,
+        "endLine": 171
+      }
+    },
+    {
+      "id": "27dac34a931e924b",
+      "content": "const currentYear = new Date().getFullYear();",
+      "metadata": {
+        "path": "components/layout/Footer.tsx",
+        "language": "typescript",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "id": "8548cd3ee5743cbe",
+      "content": "(col) => (\n            <div key={col.heading} className=\"flex flex-col gap-4\">\n              <h4 className=\"font-body text-xs font-semibold uppercase tracking-widest text-[#E8B84B]\">\n                {col.heading}\n              </h4>\n              <ul className=\"flex flex-col gap-3\">\n                {col.links.map((link) => (\n                  <li key={link.label}>\n                    <div\n                      // href={link.href}\n                      className=\"font-body text-sm text-[#6B6762] hover:text-[#F0EDE8]\n                                 transition-colors duration-150 hover:translate-x-0.5\n                                 inline-block\"\n                    >\n                      {link.label}\n                    </div>\n                  </li>\n                ))}\n              </ul>\n            </div>\n          )",
+      "metadata": {
+        "path": "components/layout/Footer.tsx",
+        "language": "typescript",
+        "startLine": 123,
+        "endLine": 143
+      }
+    },
+    {
+      "id": "4013188133d3124d",
+      "content": "(link) => (\n                  <li key={link.label}>\n                    <div\n                      // href={link.href}\n                      className=\"font-body text-sm text-[#6B6762] hover:text-[#F0EDE8]\n                                 transition-colors duration-150 hover:translate-x-0.5\n                                 inline-block\"\n                    >\n                      {link.label}\n                    </div>\n                  </li>\n                )",
+      "metadata": {
+        "path": "components/layout/Footer.tsx",
+        "language": "typescript",
+        "startLine": 129,
+        "endLine": 140
+      }
+    }
+  ],
+  [
+    {
+      "id": "adf3d2124f131f68",
+      "content": "export default function Navbar() {\n  const [scrolled, setScrolled] = useState(false);\n\n  useEffect(() => {\n    const onScroll = () => setScrolled(window.scrollY > 60);\n    window.addEventListener('scroll', onScroll);\n    return () => window.removeEventListener('scroll', onScroll);\n  }, []);\n\n  return (\n    <nav\n      className={`fixed top-0 w-full z-50 transition-all duration-500 px-6 py-4 flex items-center justify-between\n        ${scrolled\n          ? 'bg-[#0A0A0B]/80 backdrop-blur-xl shadow-2xl'\n          : 'bg-transparent'\n        }`}\n    >\n      <Link href=\"/\" className=\"flex items-center gap-2 group\">\n        <FilmIcon className=\"w-6 h-6 text-[#E8B84B] group-hover:rotate-12 transition-transform\" />\n        <span className=\"font-display text-2xl tracking-tight\">Floor15</span>\n      </Link>\n    </nav>\n  );\n}",
+      "metadata": {
+        "path": "components/layout/Navbar.tsx",
+        "language": "typescript",
+        "startLine": 7,
+        "endLine": 30
+      }
+    },
+    {
+      "id": "ea5a53b5b4e9f1dc",
+      "content": "const [scrolled, setScrolled] = useState(false);",
+      "metadata": {
+        "path": "components/layout/Navbar.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "id": "2c35170ac28bd254",
+      "content": "() => {\n    const onScroll = () => setScrolled(window.scrollY > 60);\n    window.addEventListener('scroll', onScroll);\n    return () => window.removeEventListener('scroll', onScroll);\n  }",
+      "metadata": {
+        "path": "components/layout/Navbar.tsx",
+        "language": "typescript",
+        "startLine": 10,
+        "endLine": 14
+      }
+    },
+    {
+      "id": "4acad9bd75a1e760",
+      "content": "const onScroll = () => setScrolled(window.scrollY > 60);",
+      "metadata": {
+        "path": "components/layout/Navbar.tsx",
+        "language": "typescript",
+        "startLine": 11,
+        "endLine": 11
+      }
+    },
+    {
+      "id": "9e41b1b74a6a82bc",
+      "content": "() => setScrolled(window.scrollY > 60)",
+      "metadata": {
+        "path": "components/layout/Navbar.tsx",
+        "language": "typescript",
+        "startLine": 11,
+        "endLine": 11
+      }
+    },
+    {
+      "id": "e61695b2e7f689e9",
+      "content": "() => window.removeEventListener('scroll', onScroll)",
+      "metadata": {
+        "path": "components/layout/Navbar.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 13
+      }
+    }
+  ],
+  [
+    {
+      "id": "b00cb33a31425e3e",
+      "content": "export default function SearchBar({\n  initialValue = \"\",\n}: {\n  initialValue?: string;\n}) {\n  const router = useRouter();\n  const [value, setValue] = useState(initialValue || \"\");\n  const inputRef = useRef<HTMLInputElement | null>(null);\n\n  function handleSubmit(query: string) {\n    if (query && query.trim()) {\n      router.push(`/search?q=${encodeURIComponent(query.trim())}`);\n    }\n  }\n\n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    setValue(e.target.value);\n  };\n\n  return (\n    <div className=\"flex gap-5\">\n      <div className=\"relative w-full max-w-xl\">\n        <SearchIcon className=\"absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#C8C4BE]\" />\n        <input\n          ref={inputRef}\n          type=\"text\"\n          value={value}\n          onChange={handleChange}\n          placeholder=\"Search movies, genres...\"\n          className=\"w-full bg-[#4A4A55] text-[#F0EDE8] placeholder-[#B0ACA6]\n                   pl-12 pr-5 py-4 rounded-full border-2 border-white/40\n                   focus:outline-none focus:border-[#E8B84B] focus:shadow-[0_0_0_4px_rgba(232,184,75,0.3)]\n                   transition-all duration-300 font-body text-sm\"\n          onKeyDown={(e) => {\n            if (e.key === \"Enter\") {\n              e.preventDefault();\n              handleSubmit(value);\n            }\n          }}\n        />\n      </div>\n      <Button variant=\"primary\" onClick={() => handleSubmit(value)}>\n        Go\n      </Button>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 54
+      }
+    },
+    {
+      "id": "5921d8bbcfc7da27",
+      "content": "const router = useRouter();",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "79c5a58e80daacb9",
+      "content": "const [value, setValue] = useState(initialValue || \"\");",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 14,
+        "endLine": 14
+      }
+    },
+    {
+      "id": "454f33aa43ec6207",
+      "content": "const inputRef = useRef<HTMLInputElement | null>(null);",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 15,
+        "endLine": 15
+      }
+    },
+    {
+      "id": "5dd36e529284d1f7",
+      "content": "function handleSubmit(query: string) {\n    if (query && query.trim()) {\n      router.push(`/search?q=${encodeURIComponent(query.trim())}`);\n    }\n  }",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 17,
+        "endLine": 21
+      }
+    },
+    {
+      "id": "d0267e8f7e62507a",
+      "content": "const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    setValue(e.target.value);\n  };",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 23,
+        "endLine": 25
+      }
+    },
+    {
+      "id": "c1695e718117fcf9",
+      "content": "(e: React.ChangeEvent<HTMLInputElement>) => {\n    setValue(e.target.value);\n  }",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 23,
+        "endLine": 25
+      }
+    },
+    {
+      "id": "7e20bb8add611a2b",
+      "content": "(e) => {\n            if (e.key === \"Enter\") {\n              e.preventDefault();\n              handleSubmit(value);\n            }\n          }",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 41,
+        "endLine": 46
+      }
+    },
+    {
+      "id": "f4be5e6237f54894",
+      "content": "() => handleSubmit(value)",
+      "metadata": {
+        "path": "components/search/SearchBar.tsx",
+        "language": "typescript",
+        "startLine": 49,
+        "endLine": 49
+      }
+    }
+  ],
+  [
+    {
+      "id": "cdd9abb390a8bc61",
+      "content": "interface Props {\n  label: string;\n}",
+      "metadata": {
+        "path": "components/ui/Badge.tsx",
+        "language": "typescript",
+        "startLine": 1,
+        "endLine": 3
+      }
+    },
+    {
+      "id": "8f5f7e73b5b29096",
+      "content": "export default function Badge({ label }: Props) {\n  return (\n    <span className=\"px-3 py-1 rounded-full text-xs font-body font-medium\n                     bg-white/10 text-[#9B9591] border border-white/10 uppercase tracking-wider\">\n      {label}\n    </span>\n  );\n}",
+      "metadata": {
+        "path": "components/ui/Badge.tsx",
+        "language": "typescript",
+        "startLine": 5,
+        "endLine": 12
+      }
+    }
+  ],
+  [
+    {
+      "id": "c35e6daa365640bd",
+      "content": "interface Props {\n  children: ReactNode;\n  variant?: 'primary' | 'ghost' | 'outline';\n  icon?: ReactNode;\n  onClick?: () => void;\n  className?: string;\n}",
+      "metadata": {
+        "path": "components/ui/Button.tsx",
+        "language": "typescript",
+        "startLine": 4,
+        "endLine": 10
+      }
+    },
+    {
+      "id": "5a6212cb11875a4e",
+      "content": "export default function Button({ children, variant = 'primary', icon, onClick, className }: Props) {\n  const base = 'inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-sm font-semibold transition-all duration-200';\n\n  const variants = {\n    primary: 'bg-[#E8B84B] text-[#0A0A0B] hover:bg-[#f0c966] hover:shadow-[0_0_24px_rgba(232,184,75,0.5)]',\n    ghost: 'bg-white/10 text-[#F0EDE8] hover:bg-white/20 backdrop-blur-sm',\n    outline: 'border border-[#E8B84B]/40 text-[#E8B84B] hover:bg-[#E8B84B]/10',\n  };\n\n  return (\n    <button onClick={onClick} className={cn(base, variants[variant], className)}>\n      {icon}\n      {children}\n    </button>\n  );\n}",
+      "metadata": {
+        "path": "components/ui/Button.tsx",
+        "language": "typescript",
+        "startLine": 12,
+        "endLine": 27
+      }
+    },
+    {
+      "id": "15409b6feab02ae6",
+      "content": "const base = 'inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-sm font-semibold transition-all duration-200';",
+      "metadata": {
+        "path": "components/ui/Button.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "775a7af11aedefb7",
+      "content": "const variants = {\n    primary: 'bg-[#E8B84B] text-[#0A0A0B] hover:bg-[#f0c966] hover:shadow-[0_0_24px_rgba(232,184,75,0.5)]',\n    ghost: 'bg-white/10 text-[#F0EDE8] hover:bg-white/20 backdrop-blur-sm',\n    outline: 'border border-[#E8B84B]/40 text-[#E8B84B] hover:bg-[#E8B84B]/10',\n  };",
+      "metadata": {
+        "path": "components/ui/Button.tsx",
+        "language": "typescript",
+        "startLine": 15,
+        "endLine": 19
+      }
+    }
+  ],
+  [
+    {
+      "id": "bd741bf699ffebce",
+      "content": "type ImageSize =\n  | \"w92\"\n  | \"w154\"\n  | \"w185\"\n  | \"w342\"\n  | \"w500\"\n  | \"w780\"\n  | \"w1280\"\n  | \"original\";",
+      "metadata": {
+        "path": "components/ui/TMDBImage.tsx",
+        "language": "typescript",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "id": "a2f77f21ea9da8b0",
+      "content": "const TMDB_BASE_URL = \"https://image.tmdb.org/t/p\";",
+      "metadata": {
+        "path": "components/ui/TMDBImage.tsx",
+        "language": "typescript",
+        "startLine": 13,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "050bb4ebdb9820f0",
+      "content": "interface TMDBImageProps extends Omit<ImageProps, \"src\"> {\n  path: string | null;\n  size?: ImageSize;\n  fallback?: string;\n}",
+      "metadata": {
+        "path": "components/ui/TMDBImage.tsx",
+        "language": "typescript",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "id": "8041c90caa37231a",
+      "content": "export default function TMDBImage({\n  path,\n  size = \"w500\",\n  alt,\n  className = \"\",\n  fallback = \"\",\n  ...rest // <-- all other ImageProps land here\n}: TMDBImageProps) {\n  const src = path ? `${TMDB_BASE_URL}/${size}${path}` : fallback;\n\n  return (\n    <Image\n      src={src || fallback}\n      alt={alt}\n      fill\n      className={`object-cover ${className}`}\n      {...rest} // <-- passed through to Image\n    />\n  );\n}",
+      "metadata": {
+        "path": "components/ui/TMDBImage.tsx",
+        "language": "typescript",
+        "startLine": 21,
+        "endLine": 40
+      }
+    },
+    {
+      "id": "1c54d65f624c62a1",
+      "content": "const src = path ? `${TMDB_BASE_URL}/${size}${path}` : fallback;",
+      "metadata": {
+        "path": "components/ui/TMDBImage.tsx",
+        "language": "typescript",
+        "startLine": 29,
+        "endLine": 29
+      }
+    }
+  ],
+  [
+    {
+      "id": "5de07e1540e82077",
+      "content": "export default function MovieInfoCard({ movie }: { movie: Movie | any }) {\n  return (\n    <div className=\"rounded-2xl bg-[#111114] border border-white/6 overflow-hidden\">\n      {/* Poster + Core Details */}\n      <div className=\"flex flex-col sm:flex-row gap-6 p-6\">\n        {/* Poster */}\n        <div className=\"hidden sm:flex relative flex-shrink-0 w-full sm:w-36 aspect-[2/3] sm:aspect-auto sm:h-52 rounded-xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.6)]\">\n          <TMDBImage\n            path={movie.poster_path}\n            alt={movie.title}\n            fill\n            className=\"object-cover\"\n            sizes=\"144px\"\n          />\n        </div>\n\n        {/* Title block */}\n        <div className=\"flex flex-col gap-3 flex-1 min-w-0\">\n          {/* Collection badge */}\n          {movie.belongs_to_collection && (\n            <span className=\"text-[10px] font-body font-semibold uppercase tracking-widest text-[#E8B84B]/70\">\n              {movie.belongs_to_collection.name}\n            </span>\n          )}\n\n          <h1 className=\"font-display text-3xl sm:text-4xl lg:text-5xl leading-none text-[#F0EDE8]\">\n            {movie.title}\n          </h1>\n\n          <p className=\"font-body text-sm text-[#6B6762] italic\">\n            {movie.tagline}\n          </p>\n\n          {/* Genre pills */}\n          <div className=\"flex flex-wrap gap-2 mt-1\">\n            {movie.genres.map((g: any) => (\n              <span\n                key={g.id}\n                className=\"px-3 py-1 rounded-full text-xs font-body font-medium\n                                   bg-white/6 text-[#9B9591] border border-white/8\n                                   uppercase tracking-wider\"\n              >\n                {g.name}\n              </span>\n            ))}\n          </div>\n\n          {/* Quick stats row */}\n          <div className=\"flex flex-wrap items-center gap-4 mt-2 text-sm font-body\">\n            {/* Rating */}\n            <div className=\"flex items-center gap-1.5\">\n              <StarIcon className=\"w-4 h-4 text-[#E8B84B] fill-[#E8B84B]\" />\n              <span className=\"text-[#F0EDE8] font-semibold\">\n                {movie.vote_average.toFixed(1)}\n              </span>\n              <span className=\"text-[#4A4845]\">\n                / 10 · {movie.vote_count.toLocaleString()} votes\n              </span>\n            </div>\n\n            {/* Runtime */}\n            <div className=\"flex items-center gap-1.5 text-[#9B9591]\">\n              <ClockIcon className=\"w-4 h-4\" />\n              <span>{formatRuntime(movie.runtime)}</span>\n            </div>\n\n            {/* Release */}\n            <div className=\"flex items-center gap-1.5 text-[#9B9591]\">\n              <CalendarIcon className=\"w-4 h-4\" />\n              <span>{formatDate(movie.release_date)}</span>\n            </div>\n\n            {/* Status */}\n            <span\n              className={`px-2.5 py-0.5 rounded-full text-xs font-semibold\n                        ${\n                          movie.status === \"Released\"\n                            ? \"bg-emerald-500/15 text-emerald-400 border border-emerald-500/20\"\n                            : \"bg-amber-500/15 text-amber-400 border border-amber-500/20\"\n                        }`}\n            >\n              {movie.status}\n            </span>\n          </div>\n        </div>\n      </div>\n\n      {/* Divider */}\n      <div className=\"h-px mx-6 bg-white/6\" />\n\n      {/* Overview */}\n      <div className=\"p-6 flex flex-col gap-2\">\n        <h2 className=\"font-body text-xs font-semibold uppercase tracking-widest text-[#E8B84B]\">\n          Overview\n        </h2>\n        <p className=\"font-body text-[#9B9591] leading-relaxed text-sm sm:text-base\">\n          {movie.overview}\n        </p>\n      </div>\n\n      {/* Divider */}\n      <div className=\"h-px mx-6 bg-white/6\" />\n\n      {/* ── Stats grid ── */}\n      <div className=\"grid grid-cols-2 sm:grid-cols-4 divide-x divide-y divide-white/6\">\n        <StatCell\n          icon={<DollarSignIcon className=\"w-4 h-4\" />}\n          label=\"Budget\"\n          value={formatCurrency(movie.budget)}\n        />\n        <StatCell\n          icon={<TrendingUpIcon className=\"w-4 h-4\" />}\n          label=\"Revenue\"\n          value={formatCurrency(movie.revenue)}\n          highlight\n        />\n        <StatCell\n          icon={<GlobeIcon className=\"w-4 h-4\" />}\n          label=\"Language\"\n          value={movie.original_language.toUpperCase()}\n        />\n        <StatCell\n          icon={<BuildingIcon className=\"w-4 h-4\" />}\n          label=\"Studio\"\n          value={movie.production_companies[0].name}\n        />\n      </div>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "components/ui/cards/MovieInfoCard.tsx",
+        "language": "typescript",
+        "startLine": 15,
+        "endLine": 144
+      }
+    },
+    {
+      "id": "2e43c14a2f118f6f",
+      "content": "(g: any) => (\n              <span\n                key={g.id}\n                className=\"px-3 py-1 rounded-full text-xs font-body font-medium\n                                   bg-white/6 text-[#9B9591] border border-white/8\n                                   uppercase tracking-wider\"\n              >\n                {g.name}\n              </span>\n            )",
+      "metadata": {
+        "path": "components/ui/cards/MovieInfoCard.tsx",
+        "language": "typescript",
+        "startLine": 50,
+        "endLine": 59
+      }
+    },
+    {
+      "id": "7a24af145b96aa21",
+      "content": "function StatCell({\n  icon,\n  label,\n  value,\n  highlight = false,\n}: {\n  icon: React.ReactNode;\n  label: string;\n  value: string;\n  highlight?: boolean;\n}) {\n  return (\n    <div className=\"flex flex-col gap-1.5 p-5\">\n      <div\n        className={`flex items-center gap-1.5 text-xs font-body uppercase tracking-widest\n                      ${highlight ? \"text-[#E8B84B]\" : \"text-[#4A4845]\"}`}\n      >\n        {icon}\n        {label}\n      </div>\n      <p\n        className={`font-body font-semibold text-sm\n                    ${highlight ? \"text-[#E8B84B]\" : \"text-[#F0EDE8]\"}`}\n      >\n        {value}\n      </p>\n    </div>\n  );\n}",
+      "metadata": {
+        "path": "components/ui/cards/MovieInfoCard.tsx",
+        "language": "typescript",
+        "startLine": 146,
+        "endLine": 174
+      }
+    }
+  ],
+  [
+    {
+      "id": "7d07bb7bb6986963",
+      "content": "export const dummyMovies = [\n  {\n    adult: false,\n    backdrop_path: \"/u8DU5fkLoM5tTRukzPC31oGPxaQ.jpg\",\n    genre_ids: [878, 12, 14],\n    id: 83533,\n    original_language: \"en\",\n    original_title: \"Avatar: Fire and Ash\",\n    overview:\n      \"In the wake of the devastating war against the RDA and the loss of their eldest son, Jake Sully and Neytiri face a new threat on Pandora: the Ash People, a violent and power-hungry Na'vi tribe led by the ruthless Varang. Jake's family must fight for their survival and the future of Pandora in a conflict that pushes them to their emotional and physical limits.\",\n    popularity: 329.658,\n    poster_path: \"/aabwWZWx6z1aYP4PX2ADvbDKktd.jpg\",\n    release_date: \"2025-12-17\",\n    title: \"Avatar: Fire and Ash\",\n    video: false,\n    vote_average: 7.373,\n    vote_count: 2650,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/8Tfys3mDZVp4tNoH2ktm06a0Tau.jpg\",\n    genre_ids: [878, 12],\n    id: 687163,\n    original_language: \"en\",\n    original_title: \"Project Hail Mary\",\n    overview:\n      \"Science teacher Ryland Grace wakes up on a spaceship light years from home with no recollection of who he is or how he got there. As his memory returns, he begins to uncover his mission: solve the riddle of the mysterious substance causing the sun to die out. He must call on his scientific knowledge and unorthodox ideas to save everything on Earth from extinction… but an unexpected friendship means he may not have to do it alone.\",\n    popularity: 262.4292,\n    poster_path: \"/yihdXomYb5kTeSivtFndMy5iDmf.jpg\",\n    release_date: \"2026-03-15\",\n    title: \"Project Hail Mary\",\n    video: false,\n    vote_average: 8.2,\n    vote_count: 1563,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/sS3zGYFPcfM5pArVNWl6qLyaSmU.jpg\",\n    genre_ids: [16, 28, 12, 14],\n    id: 980431,\n    original_language: \"en\",\n    original_title: \"Avatar: Aang, The Last Airbender\",\n    overview:\n      \"Avatar Aang, the world's last Airbender, learns of an ancient power that could save his culture from extinction. With the help of his friends, he embarks on a global quest to find it before it falls into the wrong hands and threatens to upend the peace they sacrificed everything to achieve.\",\n    popularity: 316.0527,\n    poster_path: \"/29Jdsak3SrwGds5k1t43kH6Khed.jpg\",\n    release_date: \"2026-10-09\",\n    title: \"Avatar: Aang, The Last Airbender\",\n    video: false,\n    vote_average: 0,\n    vote_count: 0,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/gM1kQRPwOVW1Eos5tVWqcYmHR5S.jpg\",\n    genre_ids: [27, 9648],\n    id: 1470130,\n    original_language: \"en\",\n    original_title: \"The Mortuary Assistant\",\n    overview:\n      \"Rebecca Owens, a recent mortuary science graduate takes a night shift job at River Fields Mortuary. Initially, the job seems straightforward — embalming bodies, completing paperwork, and keeping things tidy. But once Rebecca starts working the night shift, things take a dark turn.\",\n    popularity: 263.8668,\n    poster_path: \"/72AoFPC5TY4DfJwXXS9rPwPeReD.jpg\",\n    release_date: \"2026-02-13\",\n    title: \"The Mortuary Assistant\",\n    video: false,\n    vote_average: 5.421,\n    vote_count: 76,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/u53UYu5XG2hNgWGvs3xGhAVzypl.jpg\",\n    genre_ids: [16, 10751, 878, 35, 12],\n    id: 1327819,\n    original_language: \"en\",\n    original_title: \"Hoppers\",\n    overview:\n      \"Scientists have discovered how to 'hop' human consciousness into lifelike robotic animals, allowing people to communicate with animals as animals. Animal lover Mabel seizes an opportunity to use the technology, uncovering mysteries within the animal world beyond anything she could have imagined.\",\n    popularity: 226.1527,\n    poster_path: \"/xjtWQ2CL1mpmMNwuU5HeS4Iuwuu.jpg\",\n    release_date: \"2026-03-04\",\n    title: \"Hoppers\",\n    video: false,\n    vote_average: 7.589,\n    vote_count: 483,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/3ooXDVaz4xHKtwe4lkmF1gNopOC.jpg\",\n    genre_ids: [27, 53],\n    id: 1290417,\n    original_language: \"en\",\n    original_title: \"Thrash\",\n    overview:\n      \"When a Category 5 hurricane decimates a coastal town, the storm surge brings devastation, chaos, and something far more frightening onto shore: hungry sharks.\",\n    popularity: 206.5751,\n    poster_path: \"/adk8weka3O5648g3de4z3y4aE7G.jpg\",\n    release_date: \"2026-04-10\",\n    title: \"Thrash\",\n    video: false,\n    vote_average: 6.016,\n    vote_count: 344,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/bYkgJUGlkDrKzCrN6Jrd1qVx9aB.jpg\",\n    genre_ids: [35, 10749],\n    id: 20222,\n    original_language: \"es\",\n    original_title: \"Sexo con amor\",\n    overview:\n      \"In Santiago, Chile, the schoolteacher Luisa proposes a debate about sex with the parents of her students with the intention of giving classes about sex education to the youngsters.\",\n    popularity: 286.2109,\n    poster_path: \"/9Unz4SnlkXg0OAxgiLKZAfu096c.jpg\",\n    release_date: \"2003-03-27\",\n    title: \"Sex with Love\",\n    video: false,\n    vote_average: 6.519,\n    vote_count: 241,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/jRsjWwZzI39bTm44FNhRtiICd9k.jpg\",\n    genre_ids: [35, 28, 12],\n    id: 1084577,\n    original_language: \"en\",\n    original_title: \"Balls Up\",\n    overview:\n      'Two marketing executives go \"balls out\" and pitch a bold full‑coverage condom sponsorship with the World Cup. After their drunken celebration in Brazil sparks a global scandal, they must outrun furious fans, criminals, and power-hungry officials to salvage their careers and make it home alive.',\n    popularity: 214.69,\n    poster_path: \"/xwvJ3WzdJ1OCuDoY8LAxBUlQyig.jpg\",\n    release_date: \"2026-04-15\",\n    title: \"Balls Up\",\n    video: false,\n    vote_average: 5.5,\n    vote_count: 79,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/nHxWyy18SvAZ8jJeemtS8k1UNjM.jpg\",\n    genre_ids: [28, 80, 53],\n    id: 1290821,\n    original_language: \"en\",\n    original_title: \"Shelter\",\n    overview:\n      \"A man living in self-imposed exile on a remote island rescues a young girl from a violent storm, setting off a chain of events that forces him out of seclusion to protect her from enemies tied to his past.\",\n    popularity: 217.5428,\n    poster_path: \"/buPFnHZ3xQy6vZEHxbHgL1Pc6CR.jpg\",\n    release_date: \"2026-01-28\",\n    title: \"Shelter\",\n    video: false,\n    vote_average: 6.8,\n    vote_count: 566,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/wns4x1GyxCudgOZRyhXKjXVJf3T.jpg\",\n    genre_ids: [12, 53, 878],\n    id: 840464,\n    original_language: \"en\",\n    original_title: \"Greenland 2: Migration\",\n    overview:\n      \"Having found the safety of the Greenland bunker after the comet Clarke decimated the Earth, the Garrity family must now risk everything to embark on a perilous journey across the wasteland of Europe to find a new home.\",\n    popularity: 217.9235,\n    poster_path: \"/z2tqCJLsw6uEJ8nJV8BsQXGa3dr.jpg\",\n    release_date: \"2026-01-07\",\n    title: \"Greenland 2: Migration\",\n    video: false,\n    vote_average: 6.484,\n    vote_count: 879,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/gCmfeKmEAZBP5gcXpiqb0gii9rS.jpg\",\n    genre_ids: [27, 53, 35],\n    id: 1198994,\n    original_language: \"en\",\n    original_title: \"Send Help\",\n    overview:\n      \"Two colleagues become stranded on a deserted island, the only survivors of a plane crash. On the island, they must overcome past grievances and work together to survive, but ultimately, it's a battle of wills and wits to make it out alive.\",\n    popularity: 177.9039,\n    poster_path: \"/mjkS2iAgWj3ik1DTjvI15nHZ7yl.jpg\",\n    release_date: \"2026-01-22\",\n    title: \"Send Help\",\n    video: false,\n    vote_average: 7,\n    vote_count: 1029,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg\",\n    genre_ids: [10751, 35, 12, 14, 16],\n    id: 502356,\n    original_language: \"en\",\n    original_title: \"The Super Mario Bros. Movie\",\n    overview:\n      \"While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.\",\n    popularity: 171.9317,\n    poster_path: \"/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg\",\n    release_date: \"2023-04-05\",\n    title: \"The Super Mario Bros. Movie\",\n    video: false,\n    vote_average: 7.587,\n    vote_count: 10497,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/7lizs4SuEU2ihkkAa0SZ66NtHbl.jpg\",\n    genre_ids: [28, 53],\n    id: 1641319,\n    original_language: \"en\",\n    original_title: \"Sniper: No Nation\",\n    overview:\n      \"Brandon Beckett and Agent Zero lead a rescue mission in Venezuela when their friends are taken hostage.\",\n    popularity: 179.0305,\n    poster_path: \"/3T9nAX0jAp0iT18ex25BlZEpRDb.jpg\",\n    release_date: \"2026-04-07\",\n    title: \"Sniper: No Nation\",\n    video: false,\n    vote_average: 6.2,\n    vote_count: 30,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/vG42HeYtoTFflqwP42wYD7tBuNr.jpg\",\n    genre_ids: [80, 53],\n    id: 1171145,\n    original_language: \"en\",\n    original_title: \"Crime 101\",\n    overview:\n      \"When an elusive thief whose high-stakes heists unfold along the iconic 101 freeway in Los Angeles eyes the score of a lifetime, with hopes of this being his final job, his path collides with a disillusioned insurance broker who is facing her own crossroads. Determined to crack the case, a relentless detective closes in on the operation, raising the stakes even higher.\",\n    popularity: 166.6444,\n    poster_path: \"/tVvpFIoteRHNnoZMhdnwIVwJpCA.jpg\",\n    release_date: \"2026-02-11\",\n    title: \"Crime 101\",\n    video: false,\n    vote_average: 6.98,\n    vote_count: 728,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/zc08qkHtWfZ2cQGQBK1S5yafJmR.jpg\",\n    genre_ids: [27, 9648],\n    id: 1304313,\n    original_language: \"en\",\n    original_title: \"Lee Cronin's The Mummy\",\n    overview:\n      \"The young daughter of a journalist disappears into the desert without a trace—eight years later, the broken family is shocked when she is returned to them, as what should be a joyful reunion turns into a living nightmare.\",\n    popularity: 168.596,\n    poster_path: \"/8L8efNkz8rUmwR7sV0g3vnC9yjn.jpg\",\n    release_date: \"2026-04-15\",\n    title: \"Lee Cronin's The Mummy\",\n    video: false,\n    vote_average: 6.839,\n    vote_count: 93,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/tq3h43fZy0H80vzf47MAY7R9Mxo.jpg\",\n    genre_ids: [16, 35, 10751],\n    id: 1297842,\n    original_language: \"en\",\n    original_title: \"GOAT\",\n    overview:\n      \"A small goat with big dreams gets a once-in-a-lifetime shot to join the pros and play roarball, a high-intensity, co-ed, full-contact sport dominated by the fastest, fiercest animals in the world.\",\n    popularity: 149.8169,\n    poster_path: \"/wfuqMlaExcoYiUEvKfVpUTt1v4u.jpg\",\n    release_date: \"2026-02-11\",\n    title: \"GOAT\",\n    video: false,\n    vote_average: 7.908,\n    vote_count: 411,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/t9J2HXaDuJR7bvIG9XF7mttn4VY.jpg\",\n    genre_ids: [27, 9648, 80],\n    id: 1159559,\n    original_language: \"en\",\n    original_title: \"Scream 7\",\n    overview:\n      \"When a new Ghostface killer emerges in the quiet town where Sidney Prescott has built a new life, her darkest fears are realized as her daughter becomes the next target. Determined to protect her family, Sidney must face the horrors of her past to put an end to the bloodshed once and for all.\",\n    popularity: 131.2172,\n    poster_path: \"/jjyuk0edLiW8vOSnlfwWCCLpbh5.jpg\",\n    release_date: \"2026-02-25\",\n    title: \"Scream 7\",\n    video: false,\n    vote_average: 6.035,\n    vote_count: 767,\n  },\n  {\n    adult: false,\n    backdrop_path: \"/1RgPyOhN4DRs225BGTlHJqCudII.jpg\",\n    genre_ids: [16, 28, 14],\n    id: 1311031,\n    original_language: \"ja\",\n    original_title: \"劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来\",\n    overview:\n      \"The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle against Muzan Kibutsuji begins.\",\n    popularity: 137.2521,\n    poster_path: \"/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg\",\n    release_date: \"2025-07-18\",\n    title: \"Demon Slayer: Kimetsu no Yaiba Infinity Castle\",\n    video: false,\n    vote_average: 7.678,\n    vote_count: 799,\n  },\n];",
+      "metadata": {
+        "path": "data/dummy.ts",
+        "language": "typescript",
+        "startLine": 3,
+        "endLine": 310
+      }
+    },
+    {
+      "id": "94df1ac841caff71",
+      "content": "export const featuredMovie: Movie = dummyMovies[0];",
+      "metadata": {
+        "path": "data/dummy.ts",
+        "language": "typescript",
+        "startLine": 313,
+        "endLine": 313
+      }
+    }
+  ],
+  [
+    {
+      "id": "bbcc5b584faba6c5",
+      "content": "function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 4,
+        "endLine": 6
+      }
+    },
+    {
+      "id": "66d19a384d280e73",
+      "content": "function formatDuration(minutes: number): string {\n  const h = Math.floor(minutes / 60);\n  const m = minutes % 60;\n  return `${h}h ${m}m`;\n}",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 8,
+        "endLine": 12
+      }
+    },
+    {
+      "id": "435251f2e21cb80a",
+      "content": "const h = Math.floor(minutes / 60);",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "id": "9aa512ab5ab87811",
+      "content": "const m = minutes % 60;",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 10,
+        "endLine": 10
+      }
+    },
+    {
+      "id": "42d1e4c054296515",
+      "content": "function formatCurrency(amount: number): string {\n  if (amount >= 1_000_000_000)\n    return `$${(amount / 1_000_000_000).toFixed(2)}B`;\n  if (amount >= 1_000_000) return `$${(amount / 1_000_000).toFixed(0)}M`;\n  return `$${amount.toLocaleString()}`;\n}",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 14,
+        "endLine": 19
+      }
+    },
+    {
+      "id": "9a6a0d2c38b3a2fa",
+      "content": "function formatRuntime(minutes: number): string {\n  const h = Math.floor(minutes / 60);\n  const m = minutes % 60;\n  return `${h}h ${m}m`;\n}",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 21,
+        "endLine": 25
+      }
+    },
+    {
+      "id": "435251f2e21cb80a",
+      "content": "const h = Math.floor(minutes / 60);",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 22,
+        "endLine": 22
+      }
+    },
+    {
+      "id": "9aa512ab5ab87811",
+      "content": "const m = minutes % 60;",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 23,
+        "endLine": 23
+      }
+    },
+    {
+      "id": "8701db7fc180b67a",
+      "content": "function formatDate(dateStr: string): string {\n  return new Date(dateStr).toLocaleDateString(\"en-US\", {\n    year: \"numeric\",\n    month: \"long\",\n    day: \"numeric\",\n  });\n}",
+      "metadata": {
+        "path": "lib/utils.ts",
+        "language": "typescript",
+        "startLine": 27,
+        "endLine": 33
+      }
+    }
+  ],
+  [
+    {
+      "id": "d3dbb2445aa47cf2",
+      "content": "const nextConfig: NextConfig = {\n  /* config options here */\n  allowedDevOrigins: [\"192.168.1.5\"],\n  images: {\n    remotePatterns: [\n      {\n        protocol: \"https\",\n        hostname: \"image.tmdb.org\",\n      },\n    ],\n  },\n};",
+      "metadata": {
+        "path": "next.config.ts",
+        "language": "typescript",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "id": "acca6b935078e3fa",
+      "content": "export default nextConfig;",
+      "metadata": {
+        "path": "next.config.ts",
+        "language": "typescript",
+        "startLine": 16,
+        "endLine": 16
+      }
+    }
+  ],
+  [
+    {
+      "id": "8576c5800fcae17f",
+      "content": "{\n  \"name\": \"movie\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"next build\",\n    \"start\": \"next start\",\n    \"lint\": \"eslint\"\n  },\n  \"dependencies\": {\n    \"clsx\": \"^2.1.1\",\n    \"lucide-react\": \"^1.8.0\",\n    \"next\": \"16.2.4\",\n    \"react\": \"19.2.4\",\n    \"react-dom\": \"19.2.4\",\n    \"tailwind-merge\": \"^3.5.0\",\n    \"use-debounce\": \"^10.1.1\"\n  },\n  \"devDependencies\": {\n    \"@tailwindcss/postcss\": \"^4\",\n    \"@types/node\": \"^20\",\n    \"@types/react\": \"^19\",\n    \"@types/react-dom\": \"^19\",\n    \"eslint\": \"^9\",\n    \"eslint-config-next\": \"16.2.4\",\n    \"tailwindcss\": \"^4\",\n    \"typescript\": \"^5\"\n  }\n}",
+      "metadata": {
+        "path": "package.json",
+        "language": "json",
+        "startLine": 1,
+        "endLine": 31
+      }
+    }
+  ],
+  [
+    {
+      "id": "5220f526b8aca83d",
+      "content": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2017\",\n    \"lib\": [\"dom\", \"dom.iterable\", \"esnext\"],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"strict\": true,\n    \"noEmit\": true,\n    \"esModuleInterop\": true,\n    \"module\": \"esnext\",\n    \"moduleResolution\": \"bundler\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"jsx\": \"react-jsx\",\n    \"incremental\": true,\n    \"plugins\": [\n      {\n        \"name\": \"next\"\n      }\n    ],\n    \"paths\": {\n      \"@/*\": [\"./*\"]\n    }\n  },\n  \"include\": [\n    \"next-env.d.ts\",\n    \"**/*.ts\",\n    \"**/*.tsx\",\n    \".next/types/**/*.ts\",\n    \".next/dev/types/**/*.ts\",\n    \"**/*.mts\"\n  ],\n  \"exclude\": [\"node_modules\"]\n}",
+      "metadata": {
+        "path": "tsconfig.json",
+        "language": "json",
+        "startLine": 1,
+        "endLine": 35
+      }
+    }
+  ],
+  [
+    {
+      "id": "7f44155df61362c7",
+      "content": "export interface Movie {\n  id: number;\n  title: string;\n  tagline?: string;\n  description?: string;\n  genre?: string[];\n  rating?: number; // 0–10\n  year?: number;\n  duration?: number; // in minutes\n  posterUrl?: string;\n  backdropUrl?: string;\n  videoUrl?: string; // mp4 URL or YouTube embed\n  director?: string;\n  cast?: string[];\n  isFeatured?: boolean;\n  adult: boolean;\n  backdrop_path: string;\n  genre_ids: number[];\n  poster_path: string;\n  original_language: string;\n  original_title: string;\n  overview: string;\n  popularity: number;\n  release_date: string;\n  video: boolean;\n  vote_average: number;\n  vote_count: number;\n}",
+      "metadata": {
+        "path": "types/movie.ts",
+        "language": "typescript",
+        "startLine": 3,
+        "endLine": 30
+      }
+    },
+    {
+      "id": "fbd0d67706d432e8",
+      "content": "export type MovieCardProps = {\n  movie: Movie;\n  variant?: \"default\" | \"compact\" | \"wide\";\n};",
+      "metadata": {
+        "path": "types/movie.ts",
+        "language": "typescript",
+        "startLine": 32,
+        "endLine": 35
+      }
+    }
+  ]
+]

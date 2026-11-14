@@ -1,0 +1,31 @@
+{
+  "path": "next-env.d.ts",
+  "content": "/// <reference types=\"next\" />\n/// <reference types=\"next/image-types/global\" />\nimport \"./.next/dev/types/routes.d.ts\";\nimport \"./.next/dev/types/root-params.d.ts\";\n\n// NOTE: This file should not be edited\n// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.\n",
+  "size": 296,
+  "language": "typescript"
+}{
+  "path": "src/auth/auth.ts",
+  "content": "export {}; // Auth implementation will be added in Phase 2\n",
+  "size": 59,
+  "language": "typescript"
+}{
+  "path": "tests/setup/env.setup.ts",
+  "content": "process.env.DATABASE_URL = \"postgresql://test:test@localhost/test\";\nprocess.env.AUTH_SECRET = \"test_secret_for_testing_only_32chars_\";\nprocess.env.AUTH_URL = \"http://localhost:3000\";\nprocess.env.LOG_LEVEL = \"info\";\n",
+  "size": 215,
+  "language": "typescript"
+}{
+  "path": "next-env.d.ts",
+  "content": "/// <reference types=\"next\" />\n/// <reference types=\"next/image-types/global\" />\nimport \"./.next/dev/types/routes.d.ts\";\nimport \"./.next/dev/types/root-params.d.ts\";\n\n// NOTE: This file should not be edited\n// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.\n",
+  "size": 296,
+  "language": "typescript"
+}{
+  "path": "src/auth/auth.ts",
+  "content": "export {}; // Auth implementation will be added in Phase 2\n",
+  "size": 59,
+  "language": "typescript"
+}{
+  "path": "tests/setup/env.setup.ts",
+  "content": "process.env.DATABASE_URL = \"postgresql://test:test@localhost/test\";\nprocess.env.AUTH_SECRET = \"test_secret_for_testing_only_32chars_\";\nprocess.env.AUTH_URL = \"http://localhost:3000\";\nprocess.env.LOG_LEVEL = \"info\";\n",
+  "size": 215,
+  "language": "typescript"
+}
